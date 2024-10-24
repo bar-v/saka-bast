@@ -15,6 +15,7 @@ Route::get('/beranda', function () {
     return view('beranda');
 });
 
+# Jangan di Ubah
 
 Route::get('/dashboard', function () {
     return view('dashboard');
