@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;  /* Menggunakan Flexbox */
+    height: 100vh;  /* Tinggi kontainer 100% dari viewport */
+}
+
+.left, .right {
+    flex: 1;  /* Membagi kedua div agar masing-masing mengambil 50% lebar layar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.left {
+    background-color: blue; /* Warna latar belakang untuk bagian kiri */
+    border-radius : 8px;
+}
+
+.right {
+    background-color: #ffffff; /* Warna latar belakang untuk bagian kanan */
+}
+
+.anak {
+    text-position : top;
+    background-color: grey;
+    padding : 120px;
+    place-items: center;
+    border-radius: 15px;   
+    height: 200px; /* Tinggi div */
+        }
+
+.image {
+    position: absolute; /* Mengatur gambar sebagai posisi absolut */
+    top: 0; /* Menempatkan gambar di atas */
+    center: 0; /* Menempatkan gambar di kiri */
+    width: 10%; /* Mengatur lebar gambar 100% dari container */
+    height: auto; /* Menjaga proporsi gambar */
+    z-index: 5; /* Pastikan gambar berada di atas */
+}
+input[type="text"] {
+    width: 100%; /* Lebar penuh */
+    padding: 10px; /* Spasi di dalam input */
+    border: 1px solid #ccc; /* Batas input */
+    border-radius: 5px; /* Sudut tumpul input */
+    background-color: #808080; /* Warna latar belakang kotak masukan username */
+    color: #00796b; /* Warna teks kotak masukan */
+    transition: border-color 0.3s; /* Efek transisi pada batas */
+}
+input[type="password"] {
+    width: 100%; /* Lebar penuh */
+    padding: 10px; /* Spasi di dalam input */
+    border: 1px solid #ccc; /* Batas input */
+    border-radius: 5px; /* Sudut tumpul input */
+    background-color: #808080; /* Warna latar belakang kotak masukan username */
+    color: #00796b; /* Warna teks kotak masukan */
+    transition: border-color 0.3s; /* Efek transisi pada batas */
+}
+.button-container [type="submit"]{
+        align-position: center;
+        color: white;
+        background-color: blue;
+        cursor: pointer; 
+        border-radius: 5px;
+        padding: 10px;
+        
+}
+button:hover {
+    background-color: #red; /* Warna tombol saat hover */
+}
