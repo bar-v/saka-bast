@@ -10,18 +10,12 @@ Route::get('/beranda', function () {
 Route::get('/', function () {
     return view('welcome');
 });
-<<<<<<< HEAD
-Route::get('/login', function () {
-    return view('login');
-});
-=======
 
 Route::get('/beranda', function () {
     return view('beranda');
 });
 
 
->>>>>>> f8b28711648694f07dfcefcbf58ec582bbcdafc3
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -32,8 +26,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-<<<<<<< HEAD
-require __DIR__.'/auth.php';
-=======
 require __DIR__ . '/auth.php';
->>>>>>> f8b28711648694f07dfcefcbf58ec582bbcdafc3
