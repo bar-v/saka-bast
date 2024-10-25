@@ -20,7 +20,7 @@
         <!-- Bagian Kanan -->
         <div class="right">
             <h3> Login Aplikasi SAKA Arsip ANRI</h3>
-            <p>Gunakan Akun Yang Sebelumnya  Anda Buat!</p> <br>
+            <p>Gunakan Akun Yang Sebelumnya  Anda !</p> <br>
             <form>
                 <div class="username1">
                     <label for="Email">Email*:</label>
