@@ -21,7 +21,7 @@
         <div>
             <a href="/">
                 {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
-                <img src="/image/logo-anri.png" alt="">
+                <img src="/image/logo-anri.png" alt="" width="150px" height="150px">
             </a>
         </div>
 
