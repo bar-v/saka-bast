@@ -37,6 +37,10 @@ Route::get('/Manajemen', function () {
     return view('Manajemen');
 })->middleware(['auth', 'verified'])->name('Manajemen');
 
+Route::get('/contact', function () {
+    return view('contact');
+})->middleware(['auth', 'verified'])->name('Contact');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
