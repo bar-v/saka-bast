@@ -37,6 +37,10 @@ Route::get('/Manajemen', function () {
     return view('Manajemen');
 })->middleware(['auth', 'verified'])->name('Manajemen');
 
+Route::get('/Manajemenakun', function () {
+    return view('Manajemenakun');
+})->middleware(['auth', 'verified'])->name('Manajemenakun');
+
 Route::get('/contact', function () {
     return view('contact');
 })->middleware(['auth', 'verified'])->name('Contact');
