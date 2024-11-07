@@ -1,203 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manajemen Arsip</title>
+<x-app-layout>
+    <x-slot name="header">
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Manajemen Arsip') }}
+        </h2>
+    </x-slot> <br>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
+        .ibu {
+            display: flex;
+            /* Menggunakan Flexbox */
+            height: 6vh;
+            /* Tinggi kontainer 100% dari viewport */
+            width: 60vh;
+            gap: 20px;
         }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid #ddd;
-        }
-
-        th,
-        td {
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        .button-container {
-            margin: 20px 0;
-            text-align: right;
-        }
-
-        .button-container button {
-            padding: 10px 20px;
-            margin-left: 10px;
-            background-color: #4CAF50;
+        .pencari,
+        .tombol1,
+        .tombol2 {
+            flex: 1;
+            /* Membagi kedua div agar masing-masing mengambil 50% lebar layar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            padding: 5px;
+            border: 1px;
             color: white;
-            border: none;
-            cursor: pointer;
         }
 
-        .button-container button:hover {
-            background-color: #45a049;
+        .pencari {
+            position: absolute;
+            right: 10px;
+            /* Menempatkan kolom pencarian 10px dari ujung kanan */
+            top: 23%;
+            /* Menggeser ke tengah secara vertikal */
         }
 
-        .edit-btn,
-        .delete-btn {
-            padding: 5px 10px;
+        .tombol1 {
             color: white;
-            border: none;
+            background-color: green;
             cursor: pointer;
+            border-radius: 10px;
+            padding: 5px;
         }
 
-        .edit-btn {
-            background-color: #008CBA;
+        .tombol2 {
+            color: white;
+            background-color: blue;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 5px;
         }
 
-        .edit-btn:hover {
-            background-color: #007bb5;
+        button:hover {
+            background-color: darkgray;
+            /* Warna tombol saat hover */
+            border-radius: 10px;
+            padding: 6px;
+            height: 6vh;
+            /* Tinggi kontainer 100% dari viewport */
+            width: 30vh;
+            color: black;
         }
 
-        .delete-btn {
-            background-color: #f44336;
+        input[type=text] {
+            border-radius: 5px;
         }
 
-        .delete-btn:hover {
-            background-color: #e53935;
+        br {
+            width: 20vh;
         }
     </style>
-</head>
-
-<body>
-
-    <h1>Manajemen Arsip</h1>
-
-    <div class="button-container">
-        <label for="fileInput" class="button">Import File</label>
-        <input type="file" id="fileInput" style="display: none;">
-        <button onclick="importFile()">Import</button>
+    <div class="ibu">
+        <div class="tombol1">
+            <button type="button">Import</button>
+        </div>
+        <div class="tombol2">
+            <button type="button">Edit</button>
+        </div>
+        <div class="pencari">
+            <label for="search">Search:</label>
+            <input type="text" id="search" placeholder="Masukkan yang dicari...">
+        </div>
     </div>
+    <br>
+    <div class="data-arsip">
 
-
-    <table id="arsipTable" class="display">
-        <thead>
-            <tr>
-                <th>No Arsip</th>
-                <th>Kode Pelaksana</th>
-                <th>Kode Klasifikasi</th>
-                <th>Kode Satker</th>
-                <th>Nama Unit Pengolah</th>
-                <th>Uraian Informasi Arsip</th>
-                <th>Tahun Awal</th>
-                <th>Tahun Akhir</th>
-                <th>Tingkat Perkembangan Arsip</th>
-                <th>Media Simpan</th>
-                <th>Jumlah Berkas</th>
-                <th>Kondisi Fisik</th>
-                <th>Ukuran</th>
-                <th>Keterangan</th>
-                <th>Ruang</th>
-                <th>Lemari</th>
-                <th>Boks</th>
-                <th>Jenis Arsip</th>
-                <th>Alih Media</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>001</td>
-                <td>PL001</td>
-                <td>KL001</td>
-                <td>ST001</td>
-                <td>Unit A</td>
-                <td>Dokumen Keuangan 2020</td>
-                <td>2020</td>
-                <td>2021</td>
-                <td>Lengkap</td>
-                <td>Kertas</td>
-                <td>5</td>
-                <td>Baik</td>
-                <td>21 cm</td>
-                <td>--</td>
-                <td>Ruang 1</td>
-                <td>Lemari 1</td>
-                <td>Boks 1</td>
-                <td>Umum</td>
-                <td>Ya</td>
-                <td>
-                    <button class="edit-btn" onclick="editRow(this)">Edit</button>
-                    <button class="delete-btn" onclick="deleteRow(this)">Hapus</button>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#arsipTable').DataTable();
-        });
-
-
-        function importFile() {
-            var fileInput = document.getElementById('fileInput');
-            fileInput.click();
-            fileInput.onchange = function() {
-                var file = fileInput.files[0];
-                if (file) {
-                    alert("File " + file.name + " dipilih.");
-
-                }
-            };
-        }
-
-
-        function editRow(button) {
-            var row = button.closest('tr');
-            var cells = row.getElementsByTagName('td');
-            for (var i = 0; i < cells.length - 1; i++) {
-                cells[i].contentEditable = true;
-            }
-            button.innerHTML = "Save";
-            button.onclick = function() {
-                for (var i = 0; i < cells.length - 1; i++) {
-                    cells[i].contentEditable = false;
-                }
-                button.innerHTML = "Edit";
-                button.onclick = function() {
-                    editRow(button);
-                };
-            };
-        }
-
-
-        function deleteRow(button) {
-            var row = button.closest('tr');
-            row.remove();
-        }
-    </script>
-
-</body>
-
-</html>
+        <H1>Tampilan Table</H1>
+    </div>
+</x-app-layout>
