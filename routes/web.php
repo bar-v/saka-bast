@@ -35,6 +35,18 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/Manajemen', function () {
+    return view('Manajemen');
+})->middleware(['auth', 'verified'])->name('Manajemen');
+
+Route::get('/Manajemenakun', function () {
+    return view('Manajemenakun');
+})->middleware(['auth', 'verified'])->name('Manajemenakun');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->middleware(['auth', 'verified'])->name('Contact');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

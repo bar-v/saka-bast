@@ -89,6 +89,13 @@
 
     <h1>Manajemen Arsip</h1>
 
+    <div class="button-container">
+        <label for="fileInput" class="button">Import File</label>
+        <input type="file" id="fileInput" style="display: none;">
+        <button onclick="importFile()">Import</button>
+    </div>
+
+
     <table id="arsipTable" class="display">
         <thead>
             <tr>
@@ -153,17 +160,17 @@
         });
 
 
-        // function importFile() {
-        //     var fileInput = document.getElementById('fileInput');
-        //     fileInput.click();
-        //     fileInput.onchange = function() {
-        //         var file = fileInput.files[0];
-        //         if (file) {
-        //             alert("File " + file.name + " dipilih.");
+        function importFile() {
+            var fileInput = document.getElementById('fileInput');
+            fileInput.click();
+            fileInput.onchange = function() {
+                var file = fileInput.files[0];
+                if (file) {
+                    alert("File " + file.name + " dipilih.");
 
-        //         }
-        //     };
-        // }
+                }
+            };
+        }
 
 
         function editRow(button) {
