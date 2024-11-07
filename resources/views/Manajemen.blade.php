@@ -1,4 +1,5 @@
-//Page Manajemen Arsip
+<!DOCTYPE html>
+<html lang="en">
 
 <x-app-layout>
     <x-slot name="header">
