@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeUnit\FunctionUnit;
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,6 +47,7 @@ Route::get('/contact', function () {
     return view('contact');
 })->middleware(['auth', 'verified'])->name('Contact');
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -52,3 +55,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+//Laravel Excel Import Route
+Route::get('arsip/import', [App\Http\Controllers\ArsipController::class, 'index']);
+Route::post('arsip/import', [App\Http\Controllers\ArsipController::class, 'importExcelData']);
+// Route::post('Manajemen', [ArsipController::class, 'import'])->name('Manajemen.import');
+
+Route::get('Manajemen/import', function () {
+    return (view('Manajemen/import'));
+});
