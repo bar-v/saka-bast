@@ -21,8 +21,8 @@ Route::get('/masuk', function () {
     return view('masuk');
 });
 
-Route::get('/manajemen', function () {
-    return view('manajemen');
+Route::get('/Manajemen', function () {
+    return view('Manajemen');
 });
 
 Route::get('/beranda', function () {
