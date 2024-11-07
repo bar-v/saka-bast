@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeUnit\FunctionUnit;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,8 +21,8 @@ Route::get('/masuk', function () {
     return view('masuk');
 });
 
-Route::get('/Manajemen', function () {
-    return view('Manajemen');
+Route::get('/manajemen', function () {
+    return view('manajemen');
 });
 
 Route::get('/beranda', function () {
@@ -33,6 +35,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -40,3 +43,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+//Laravel Excel Import Route
+Route::get('arsip/import', [App\Http\Controllers\ArsipController::class, 'index']);
+Route::post('arsip/import', [App\Http\Controllers\ArsipController::class, 'importExcelData']);
+// Route::post('Manajemen', [ArsipController::class, 'import'])->name('Manajemen.import');
+
+Route::get('Manajemen/import', function () {
+    return (view('Manajemen/import'));
+});

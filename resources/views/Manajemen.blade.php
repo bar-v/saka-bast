@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manajemen Arsip</title>
-    
+
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <style>
         body {
@@ -12,29 +13,39 @@
             margin: 20px;
             background-color: #f4f4f4;
         }
+
         h1 {
             text-align: center;
             margin-bottom: 20px;
         }
+
         table {
             width: 100%;
             margin-top: 20px;
             border-collapse: collapse;
         }
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
-        th, td {
+
+        th,
+        td {
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
         .button-container {
             margin: 20px 0;
             text-align: right;
         }
+
         .button-container button {
             padding: 10px 20px;
             margin-left: 10px;
@@ -43,40 +54,41 @@
             border: none;
             cursor: pointer;
         }
+
         .button-container button:hover {
             background-color: #45a049;
         }
-        .edit-btn, .delete-btn {
+
+        .edit-btn,
+        .delete-btn {
             padding: 5px 10px;
             color: white;
             border: none;
             cursor: pointer;
         }
+
         .edit-btn {
             background-color: #008CBA;
         }
+
         .edit-btn:hover {
             background-color: #007bb5;
         }
+
         .delete-btn {
             background-color: #f44336;
         }
+
         .delete-btn:hover {
             background-color: #e53935;
         }
     </style>
 </head>
+
 <body>
 
     <h1>Manajemen Arsip</h1>
 
-    <div class="button-container">
-        <label for="fileInput" class="button">Import File</label>
-        <input type="file" id="fileInput" style="display: none;">
-        <button onclick="importFile()">Import</button>
-    </div>
-
-    
     <table id="arsipTable" class="display">
         <thead>
             <tr>
@@ -128,11 +140,11 @@
                     <button class="delete-btn" onclick="deleteRow(this)">Hapus</button>
                 </td>
             </tr>
-            
+
         </tbody>
     </table>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script>
@@ -140,44 +152,45 @@
             $('#arsipTable').DataTable();
         });
 
-        
-        function importFile() {
-            var fileInput = document.getElementById('fileInput');
-            fileInput.click();
-            fileInput.onchange = function() {
-                var file = fileInput.files[0];
-                if (file) {
-                    alert("File " + file.name + " dipilih.");
-                    
-                }
-            };
-        }
 
-        
+        // function importFile() {
+        //     var fileInput = document.getElementById('fileInput');
+        //     fileInput.click();
+        //     fileInput.onchange = function() {
+        //         var file = fileInput.files[0];
+        //         if (file) {
+        //             alert("File " + file.name + " dipilih.");
+
+        //         }
+        //     };
+        // }
+
+
         function editRow(button) {
             var row = button.closest('tr');
             var cells = row.getElementsByTagName('td');
-            for (var i = 0; i < cells.length - 1; i++) { 
-                cells[i].contentEditable = true; 
+            for (var i = 0; i < cells.length - 1; i++) {
+                cells[i].contentEditable = true;
             }
             button.innerHTML = "Save";
             button.onclick = function() {
                 for (var i = 0; i < cells.length - 1; i++) {
-                    cells[i].contentEditable = false; 
+                    cells[i].contentEditable = false;
                 }
                 button.innerHTML = "Edit";
                 button.onclick = function() {
-                    editRow(button); 
+                    editRow(button);
                 };
             };
         }
 
-        
+
         function deleteRow(button) {
             var row = button.closest('tr');
-            row.remove(); 
+            row.remove();
         }
     </script>
 
 </body>
+
 </html>
