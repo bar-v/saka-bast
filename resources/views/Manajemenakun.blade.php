@@ -16,7 +16,7 @@
                 </div>
                 <div>
                     <p class="mb-1"><span class="font-semibold">Nama Depan</span> : RAJA IBLIS</p>
-                    <p class="mb-1"><span class="font-semibold">Nama Belakang</span> : HAPID</p>
+                    <p class="mb-1"><span class="font-semibold">Nama Belakang</span> : HAPID kun</p>
                     <p class="mb-1"><span class="font-semibold">Email</span> : hapid@gmail.com</p>
                     <p class="mb-1"><span class="font-semibold">Nomor HP</span> : 08223456789</p>
                 </div>
