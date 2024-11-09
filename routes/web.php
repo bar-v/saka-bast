@@ -61,12 +61,10 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 //Laravel Excel Import Route
-Route::get('arsip/import', [App\Http\Controllers\ArsipController::class, 'index']);
+Route::get('arsip', [App\Http\Controllers\ArsipController::class, 'index']);
 Route::post('arsip/import', [App\Http\Controllers\ArsipController::class, 'importExcelData']);
 // Route::post('Manajemen', [ArsipController::class, 'import'])->name('Manajemen.import');
 
 Route::get('Manajemen/import', function () {
     return (view('Manajemen/import'));
 });
-
-Route::resource('Manajemen', ArsipController::class);

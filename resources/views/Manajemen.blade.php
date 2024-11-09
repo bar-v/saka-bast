@@ -6,7 +6,7 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Manajemen Arsip') }}
         </h2>
-    </x-slot> 
+    </x-slot>
     <br>
 
     <style>
@@ -30,7 +30,8 @@
             color: white;
         }
 
-        .tombol1, .tombol2 {
+        .tombol1,
+        .tombol2 {
             flex-basis: 130px;
             display: flex;
             justify-content: center;
@@ -44,32 +45,7 @@
             padding: 10px 22px;
             background-color: #1ed363;
             border-radius: 6px;
-            color:white;
-            border: none;
-            font-size: 18;
-            font-weight: 400;
-            box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.2s ease;    
-        }
-        .tombol1:active{
-            transform: scale(0.96);
-        }
-        .tombol1::before,
-        .tombol1::after{
-            content: "";
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 100%;
-            width: 150%;
-        }
-        .tombol2 {
-            position: relative;
-            padding: 10px 22px;
-            background-color: #008cff;
-            border-radius: 6px;
-            color:white;
+            color: white;
             border: none;
             font-size: 18;
             font-weight: 400;
@@ -77,13 +53,43 @@
             cursor: pointer;
             transition: transform 0.2s ease;
         }
-        .tombol2:active{
+
+        .tombol1:active {
             transform: scale(0.96);
         }
-        .tombol2::before,
-        .tombol2::after{
+
+        .tombol1::before,
+        .tombol1::after {
             content: "";
-            position: absolute; 
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+            width: 150%;
+        }
+
+        .tombol2 {
+            position: relative;
+            padding: 10px 22px;
+            background-color: #008cff;
+            border-radius: 6px;
+            color: white;
+            border: none;
+            font-size: 18;
+            font-weight: 400;
+            box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .tombol2:active {
+            transform: scale(0.96);
+        }
+
+        .tombol2::before,
+        .tombol2::after {
+            content: "";
+            position: absolute;
             left: 50%;
             transform: translateX(-50%);
             height: 100%;
@@ -113,8 +119,10 @@
             padding: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             overflow: auto;
-            margin: 20px auto; /* Centering the box horizontally */
-            z-index: 10; /* Ensure it appears above other content */
+            margin: 20px auto;
+            /* Centering the box horizontally */
+            z-index: 10;
+            /* Ensure it appears above other content */
             position: relative;
         }
 
@@ -124,7 +132,8 @@
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
@@ -184,12 +193,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($asrips as $arsip)
-                    <tr>
-                        {{-- <td>{{ $item->id }}</td> --}}
-                        <td>{{ $arsip->nomor_arsip }}</td>
-                        <td>{{ $arsip->kode_pelaksana }}</td>
-                    </tr>
+                    @foreach ($arsips as $item)
+                        <tr>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->nomor_arsip }}</td>
+                            <td>{{ $item->kode_pelaksana }}</td>
+                        </tr>
                     @endforeach
                     {{-- <!-- Baris tabel untuk data (bisa ditambahkan lebih banyak sesuai kebutuhan) -->
                     <tr>
