@@ -5,15 +5,12 @@
         </h2>
     </x-slot> <br>
 
-    
+    <!-- Kotak putih -->
+    <div class="flex justify-center items-center min-h-screen">
+        <!--  tinggi dan lebar -->
+        <div class="bg-white w-3/4 h-[700px] rounded-lg shadow-lg p-6" style="height: 700px;">
+            <!-- teks dalam kotak -->
+            <h1 class="text-8xl font-bold" style="font-size: 60px !important;">Hubungi Kami</h1>
 
-        <!-- Kotak putih di tengah -->
-        <div class="flex justify-center items-center min-h-screen">
-            <!-- warna ama ukuran ny Kotak putih -->
-            <div class="bg-white w-3/4 min-h-auto rounded-lg shadow-lg p-6">
-                <!-- teks dalam kotak -->
-                <p>Informasi Administrator</p>
-            </div>
-        </div>
-
-    </x-app-layout>
+    </div>
+</x-app-layout>
