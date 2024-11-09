@@ -11,25 +11,30 @@ class ArsipController extends Controller
 {
     public function index()
     {
-        $arsips = Arsip::all();
-        return view('Manajemen', compact('arsips'));
+        $arsip = Arsip::all();
+        // dd($arsip);
+        return view('Manajemen', compact('arsip'));
     }
 
-    public function importExcelData(Request $request)
+    public function importArsipExcel(Request $request)
     {
-
+        $file = $request->file('file');
+        $namaFile = $file->getClientOriginalName();
+        $file->move('DataArsip', $namaFile);
         //Validasi file xlsx, xls dan csv
-        $request->validate([
-            'import_file' => 'required|mimes:xlsx, xls, csv',
-            'file'
+        Excel::import(new ArsipImport, public_path('/DataArsip/' . $namaFile));
+        return redirect('/Manajemen');
+        // Redirect kembali dengan pesan sukses
 
-        ]);
 
         // Proses import file dengan Laravel Excel
-        Excel::import(new ArsipImport, $request->file('import_file'));
+        // Excel::import(new ArsipImport, $request->file('import_file'));
+        // $request->validate([
+        //     'import_file' => 'required|mimes:xlsx, xls, csv',
+        //     'file'
+        // ]);
 
-        // Redirect kembali dengan pesan sukses
-        return redirect()->back()->with('status', 'Data Imported Successfully.');
+
     }
 
     // public function 

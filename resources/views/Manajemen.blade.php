@@ -151,8 +151,10 @@
 
     <!-- Baris tombol dan pencarian -->
     <div class="ibu">
+
         <div class="tombol1">
-            <button type="button">Import</button>
+            <button type="submit">Import</button>
+
         </div>
         <div class="tombol2">
             <button type="button">Edit</button>
@@ -162,6 +164,19 @@
             <label for="search" class="mr-2">Search:</label>
             <input type="text" id="search" placeholder="Masukkan yang dicari...">
         </div>
+
+        <div class="input-group">
+
+            <form action="{{ route('importarsip') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+
+                <input type="file" name="file" required="required">
+                <div class="">
+                    <button type="submit">Import</button>
+                </div>
+            </form>
+        </div>
+
     </div>
 
     <!-- Kotak putih sebagai latar belakang tabel -->
@@ -173,7 +188,7 @@
                     <tr>
                         <th>NO ARSIP</th>
                         <th>KODE PELAKSANA</th>
-                        {{-- <th>KODE KLASIFIKASI</th>
+                        <th>KODE KLASIFIKASI</th>
                         <th>KODE SATKER</th>
                         <th>NAMA UNIT PENGOLAH</th>
                         <th>URAIAN INFORMASI ARSIP</th>
@@ -189,15 +204,32 @@
                         <th>LEMARI</th>
                         <th>BOKS</th>
                         <th>JENIS ARSIP</th>
-                        <th>ALIH MEDIA</th> --}}
+                        <th>ALIH MEDIA</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($arsips as $item)
+                    @foreach ($arsip as $item)
                         <tr>
-                            <td>{{ $item->id }}</td>
+                            {{-- <td>{{ $item->id }}</td> --}}
                             <td>{{ $item->nomor_arsip }}</td>
                             <td>{{ $item->kode_pelaksana }}</td>
+                            <td>{{ $item->kode_klasifikasi }}</td>
+                            <td>{{ $item->kode_satker }}</td>
+                            <td>{{ $item->nama_unit_pengolah }}</td>
+                            <td>{{ $item->uraian_informasi_arsip }}</td>
+                            <td>{{ $item->tahun_awal }}</td>
+                            <td>{{ $item->tahun_akhir }}</td>
+                            <td>{{ $item->tingkat_perkembangan }}</td>
+                            <td>{{ $item->media_simpan }}</td>
+                            <td>{{ $item->jumlah_berkas }}</td>
+                            <td>{{ $item->kondisi_fisik }}</td>
+                            <td>{{ $item->ukuran }}</td>
+                            <td>{{ $item->keterangan }}</td>
+                            <td>{{ $item->ruang }}</td>
+                            <td>{{ $item->lemari }}</td>
+                            <td>{{ $item->boks }}</td>
+                            <td>{{ $item->jenis_arsip }}</td>
+                            <td>{{ $item->alih_media }}</td>
                         </tr>
                     @endforeach
                     {{-- <!-- Baris tabel untuk data (bisa ditambahkan lebih banyak sesuai kebutuhan) -->
