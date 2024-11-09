@@ -64,3 +64,5 @@ Route::post('arsip/import', [App\Http\Controllers\ArsipController::class, 'impor
 Route::get('Manajemen/import', function () {
     return (view('Manajemen/import'));
 });
+
+Route::resource('Manajemen', ArsipController::class);

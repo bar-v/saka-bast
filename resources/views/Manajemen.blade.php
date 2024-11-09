@@ -2,12 +2,6 @@
 <html lang="en">
 
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Manajemen Arsip') }}
-        </h2>
-    </x-slot> 
-    <br>
 
     <style>
         .ibu {
@@ -164,7 +158,7 @@
                     <tr>
                         <th>NO ARSIP</th>
                         <th>KODE PELAKSANA</th>
-                        <th>KODE KLASIFIKASI</th>
+                        {{-- <th>KODE KLASIFIKASI</th>
                         <th>KODE SATKER</th>
                         <th>NAMA UNIT PENGOLAH</th>
                         <th>URAIAN INFORMASI ARSIP</th>
@@ -180,11 +174,18 @@
                         <th>LEMARI</th>
                         <th>BOKS</th>
                         <th>JENIS ARSIP</th>
-                        <th>ALIH MEDIA</th>
+                        <th>ALIH MEDIA</th> --}}
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Baris tabel untuk data (bisa ditambahkan lebih banyak sesuai kebutuhan) -->
+                    @foreach ($asrips as $arsip)
+                    <tr>
+                        {{-- <td>{{ $item->id }}</td> --}}
+                        <td>{{ $arsip->nomor_arsip }}</td>
+                        <td>{{ $arsip->kode_pelaksana }}</td>
+                    </tr>
+                    @endforeach
+                    {{-- <!-- Baris tabel untuk data (bisa ditambahkan lebih banyak sesuai kebutuhan) -->
                     <tr>
                         <td></td>
                         <td></td>
@@ -206,7 +207,7 @@
                         <td></td>
                         <td></td>
                     </tr>
-                    <!-- Tambahkan baris lain jika diperlukan -->
+                    <!-- Tambahkan baris lain jika diperlukan --> --}}
                 </tbody>
             </table>
         </div>

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Imports\ArsipImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Arsip;
 
 class ArsipController extends Controller
 {
     public function index()
     {
-        return view('arsip.index');
+        $arsips = Arsip::all();
+        return view('Manajemen', compact('arsips'));
     }
 
     public function importExcelData(Request $request)
