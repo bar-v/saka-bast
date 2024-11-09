@@ -40,17 +40,54 @@
         }
 
         .tombol1 {
-            background-color: green;
+            position: relative;
+            padding: 10px 22px;
+            background-color: #1ed363;
+            border-radius: 6px;
+            color:white;
+            border: none;
+            font-size: 18;
+            font-weight: 400;
+            box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.1);
             cursor: pointer;
-            border-radius: 10px;
-            padding: 5px;
+            transition: transform 0.2s ease;    
         }
-
+        .tombol1:active{
+            transform: scale(0.96);
+        }
+        .tombol1::before,
+        .tombol1::after{
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+            width: 150%;
+        }
         .tombol2 {
-            background-color: blue;
+            position: relative;
+            padding: 10px 22px;
+            background-color: #008cff;
+            border-radius: 6px;
+            color:white;
+            border: none;
+            font-size: 18;
+            font-weight: 400;
+            box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.1);
             cursor: pointer;
-            border-radius: 10px;
-            padding: 5px;
+            transition: transform 0.2s ease;
+        }
+        .tombol2:active{
+            transform: scale(0.96);
+        }
+        .tombol2::before,
+        .tombol2::after{
+            content: "";
+            position: absolute; 
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+            width: 150%;
         }
 
         button:hover {
