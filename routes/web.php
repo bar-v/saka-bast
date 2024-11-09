@@ -13,6 +13,10 @@ Route::get('/beranda', function () {
     return view('beranda');
 });
 
+Route::get('/datainsert', function () {
+    return view('datainsert');
+});
+
 Route::get('/login', function () {
     return view('login');
 });
