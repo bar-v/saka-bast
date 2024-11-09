@@ -2,6 +2,13 @@
 <html lang="en">
 
 <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Manajemen Arsip') }}
+        </h2>
+    </x-slot>
+    <br>
+
     <style>
         .ibu {
             padding-top: 2%;
@@ -23,7 +30,8 @@
             color: white;
         }
 
-        .tombol1, .tombol2 {
+        .tombol1,
+        .tombol2 {
             flex-basis: 130px;
             display: flex;
             justify-content: center;
@@ -37,32 +45,7 @@
             padding: 10px 22px;
             background-color: #1ed363;
             border-radius: 6px;
-            color:white;
-            border: none;
-            font-size: 18;
-            font-weight: 400;
-            box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.2s ease;    
-        }
-        .tombol1:active{
-            transform: scale(0.96);
-        }
-        .tombol1::before,
-        .tombol1::after{
-            content: "";
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 100%;
-            width: 150%;
-        }
-        .tombol2 {
-            position: relative;
-            padding: 10px 22px;
-            background-color: #008cff;
-            border-radius: 6px;
-            color:white;
+            color: white;
             border: none;
             font-size: 18;
             font-weight: 400;
@@ -70,13 +53,43 @@
             cursor: pointer;
             transition: transform 0.2s ease;
         }
-        .tombol2:active{
+
+        .tombol1:active {
             transform: scale(0.96);
         }
-        .tombol2::before,
-        .tombol2::after{
+
+        .tombol1::before,
+        .tombol1::after {
             content: "";
-            position: absolute; 
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+            width: 150%;
+        }
+
+        .tombol2 {
+            position: relative;
+            padding: 10px 22px;
+            background-color: #008cff;
+            border-radius: 6px;
+            color: white;
+            border: none;
+            font-size: 18;
+            font-weight: 400;
+            box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .tombol2:active {
+            transform: scale(0.96);
+        }
+
+        .tombol2::before,
+        .tombol2::after {
+            content: "";
+            position: absolute;
             left: 50%;
             transform: translateX(-50%);
             height: 100%;
@@ -106,8 +119,10 @@
             padding: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             overflow: auto;
-            margin: 20px auto; /* Centering the box horizontally */
-            z-index: 10; /* Ensure it appears above other content */
+            margin: 20px auto;
+            /* Centering the box horizontally */
+            z-index: 10;
+            /* Ensure it appears above other content */
             position: relative;
         }
 
@@ -117,7 +132,8 @@
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
@@ -135,8 +151,10 @@
 
     <!-- Baris tombol dan pencarian -->
     <div class="ibu">
+
         <div class="tombol1">
-            <button type="button">Import</button>
+            <button type="submit">Import</button>
+
         </div>
         <div class="tombol2">
             <button type="button">Edit</button>
@@ -146,6 +164,19 @@
             <label for="search" class="mr-2">Search:</label>
             <input type="text" id="search" placeholder="Masukkan yang dicari...">
         </div>
+
+        <div class="input-group">
+
+            <form action="{{ route('importarsip') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+
+                <input type="file" name="file" required="required">
+                <div class="">
+                    <button type="submit">Import</button>
+                </div>
+            </form>
+        </div>
+
     </div>
 
     <!-- Kotak putih sebagai latar belakang tabel -->
@@ -177,7 +208,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Baris tabel untuk data (bisa ditambahkan lebih banyak sesuai kebutuhan) -->
+                    @foreach ($arsip as $item)
+                        <tr>
+                            {{-- <td>{{ $item->id }}</td> --}}
+                            <td>{{ $item->nomor_arsip }}</td>
+                            <td>{{ $item->kode_pelaksana }}</td>
+                            <td>{{ $item->kode_klasifikasi }}</td>
+                            <td>{{ $item->kode_satker }}</td>
+                            <td>{{ $item->nama_unit_pengolah }}</td>
+                            <td>{{ $item->uraian_informasi_arsip }}</td>
+                            <td>{{ $item->tahun_awal }}</td>
+                            <td>{{ $item->tahun_akhir }}</td>
+                            <td>{{ $item->tingkat_perkembangan }}</td>
+                            <td>{{ $item->media_simpan }}</td>
+                            <td>{{ $item->jumlah_berkas }}</td>
+                            <td>{{ $item->kondisi_fisik }}</td>
+                            <td>{{ $item->ukuran }}</td>
+                            <td>{{ $item->keterangan }}</td>
+                            <td>{{ $item->ruang }}</td>
+                            <td>{{ $item->lemari }}</td>
+                            <td>{{ $item->boks }}</td>
+                            <td>{{ $item->jenis_arsip }}</td>
+                            <td>{{ $item->alih_media }}</td>
+                        </tr>
+                    @endforeach
+                    {{-- <!-- Baris tabel untuk data (bisa ditambahkan lebih banyak sesuai kebutuhan) -->
                     <tr>
                         <td></td>
                         <td></td>
@@ -199,7 +254,7 @@
                         <td></td>
                         <td></td>
                     </tr>
-                    <!-- Tambahkan baris lain jika diperlukan -->
+                    <!-- Tambahkan baris lain jika diperlukan --> --}}
                 </tbody>
             </table>
         </div>
