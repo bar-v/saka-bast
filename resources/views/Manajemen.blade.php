@@ -157,7 +157,6 @@
             <label for="search" class="mr-2">Search:</label>
             <input type="text" id="search" placeholder="Masukkan yang dicari...">
         </div>
-
     </div>
 
     <!-- Kotak putih sebagai latar belakang tabel -->
