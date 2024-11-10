@@ -2,13 +2,6 @@
 <html lang="en">
 
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Manajemen Arsip') }}
-        </h2>
-    </x-slot>
-    <br>
-
     <style>
         .ibu {
             padding-top: 2%;
@@ -153,28 +146,16 @@
     <div class="ibu">
 
         <div class="tombol1">
-            <button type="submit">Import</button>
+            <a href=""><button type="submit">Import</button></a>
 
         </div>
         <div class="tombol2">
-            <button type="button">Edit</button>
+            <a href=""><button type="button">Edit</button></a>
         </div>
         <!-- Pencarian berada di ujung kanan dengan teks label putih -->
         <div class="pencari">
             <label for="search" class="mr-2">Search:</label>
             <input type="text" id="search" placeholder="Masukkan yang dicari...">
-        </div>
-
-        <div class="input-group">
-
-            <form action="{{ route('importarsip') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-
-                <input type="file" name="file" required="required">
-                <div class="">
-                    <button type="submit">Import</button>
-                </div>
-            </form>
         </div>
 
     </div>
