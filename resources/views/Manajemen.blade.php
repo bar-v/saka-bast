@@ -74,16 +74,6 @@
 </head>
 
 <x-app-layout>
-    <!-- Tambahkan kelas header-bg untuk mengatur latar belakang gelap -->
-    <x-slot name="header">
-        <div class="header-bg">
-            <h2 class="font-semibold text-xl leading-tight">
-                {{ __('Manajemen Arsip') }}
-            </h2>
-        </div>
-    </x-slot>
-
-    <br>
 
     <!-- Baris tombol dan pencarian -->
     <div class="ibu">
