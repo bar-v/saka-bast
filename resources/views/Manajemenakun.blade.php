@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <!-- Containerny -->
     <div class="flex justify-center items-center min-h-screen">
         <!-- kotak putih  -->

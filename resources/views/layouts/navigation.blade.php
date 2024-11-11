@@ -13,7 +13,7 @@
 
 
                 <!-- Navigation Links -->
-                <div class="bg-gray-900 rounded-full inline-flex items-center">
+                <div class="inline-flex items-center">
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
