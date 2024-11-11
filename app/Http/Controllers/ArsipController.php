@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ArsipExport;
 use App\Models\Arsip;
 use App\Imports\ArsipImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class ArsipController extends Controller
 {
@@ -14,6 +16,10 @@ class ArsipController extends Controller
         $arsip = Arsip::all();
         // dd($arsip);
         return view('Manajemen', compact('arsip'));
+    }
+
+    public function arsipexport(){
+        return Excel::download(new ArsipExport,'arsip.xlsx');
     }
 
     public function importArsipExcel(Request $request)

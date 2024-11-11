@@ -68,3 +68,6 @@ Route::post('/importarsip', [App\Http\Controllers\ArsipController::class, 'impor
 Route::get('Manajemen/import', function () {
     return (view('Manajemen/import'));
 });
+
+//Laravel Export Excel Route
+Route::get('/exportarsip','ArsipController@index')->name('exportarsip');

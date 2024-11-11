@@ -18,21 +18,7 @@ return new class extends Migration
             $table->string('kode_klasifikasi');
             $table->string('kode_satker');
             $table->string('nama_unit_pengolah');
-            $table->text('uraian_informasi_arsip');
-            $table->year('tahun_awal');
-            $table->year('tahun_akhir')->nullable();
-            $table->string('tingkat_perkembangan');
-            $table->string('media_simpan');
-            $table->string('jumlah_berkas');
-            $table->string('kondisi_fisik');
-            $table->string('ukuran');
-            $table->string('keterangan')->nullable();
-            $table->string('ruang');
-            $table->integer('lemari');
-            $table->integer('boks');
-            $table->string('jenis_arsip');
-            $table->string('alih_media');
-            // $table->timestamps();
+            //$table->timestamps();
         });
     }
 
@@ -44,3 +30,4 @@ return new class extends Migration
         Schema::dropIfExists('arsip');
     }
 };
+

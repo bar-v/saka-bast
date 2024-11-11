@@ -146,7 +146,7 @@
     <div class="ibu">
 
         <div class="tombol1">
-            <a href=""><button type="submit">Import</button></a>
+            <a href="{{ route('exportarsip') }}"><button type="submit">Import</button></a>
 
         </div>
         <div class="tombol2">
@@ -164,30 +164,13 @@
         <div class="background-box">
             <!-- Tabel -->
             <table>
-                <thead>
                     <tr>
                         <th>NO ARSIP</th>
                         <th>KODE PELAKSANA</th>
                         <th>KODE KLASIFIKASI</th>
                         <th>KODE SATKER</th>
                         <th>NAMA UNIT PENGOLAH</th>
-                        <th>URAIAN INFORMASI ARSIP</th>
-                        <th>TAHUN AWAL</th>
-                        <th>TAHUN AKHIR</th>
-                        <th>TINGKAT PERKEMBANGAN ARSIP</th>
-                        <th>MEDIA SIMPAN</th>
-                        <th>JUMLAH BERKAS</th>
-                        <th>KONDISI FISIK</th>
-                        <th>UKURAN</th>
-                        <th>KETERANGAN</th>
-                        <th>RUANG</th>
-                        <th>LEMARI</th>
-                        <th>BOKS</th>
-                        <th>JENIS ARSIP</th>
-                        <th>ALIH MEDIA</th>
                     </tr>
-                </thead>
-                <tbody>
                     @foreach ($arsip as $item)
                         <tr>
                             {{-- <td>{{ $item->id }}</td> --}}
@@ -196,46 +179,8 @@
                             <td>{{ $item->kode_klasifikasi }}</td>
                             <td>{{ $item->kode_satker }}</td>
                             <td>{{ $item->nama_unit_pengolah }}</td>
-                            <td>{{ $item->uraian_informasi_arsip }}</td>
-                            <td>{{ $item->tahun_awal }}</td>
-                            <td>{{ $item->tahun_akhir }}</td>
-                            <td>{{ $item->tingkat_perkembangan }}</td>
-                            <td>{{ $item->media_simpan }}</td>
-                            <td>{{ $item->jumlah_berkas }}</td>
-                            <td>{{ $item->kondisi_fisik }}</td>
-                            <td>{{ $item->ukuran }}</td>
-                            <td>{{ $item->keterangan }}</td>
-                            <td>{{ $item->ruang }}</td>
-                            <td>{{ $item->lemari }}</td>
-                            <td>{{ $item->boks }}</td>
-                            <td>{{ $item->jenis_arsip }}</td>
-                            <td>{{ $item->alih_media }}</td>
                         </tr>
                     @endforeach
-                    {{-- <!-- Baris tabel untuk data (bisa ditambahkan lebih banyak sesuai kebutuhan) -->
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <!-- Tambahkan baris lain jika diperlukan --> --}}
-                </tbody>
             </table>
         </div>
     </div>
