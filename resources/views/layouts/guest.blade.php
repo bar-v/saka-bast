@@ -21,12 +21,12 @@
         <div>
             <a href="/">
                 {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
-                <img src="/image/logo-anri.png" alt="" width="150px" height="150px">
+                <img src="/image/anri1.svg" alt="" width="150px" height="150px">
             </a>
         </div>
 
         <div
-            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-gray-600 shadow-md overflow-hidden sm:rounded-lg">
             {{ $slot }}
         </div>
     </div>

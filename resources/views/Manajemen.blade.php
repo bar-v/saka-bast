@@ -2,13 +2,6 @@
 <html lang="en">
 
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Manajemen Arsip') }}
-        </h2>
-    </x-slot>
-    <br>
-
     <style>
         .ibu {
             padding-top: 2%;
