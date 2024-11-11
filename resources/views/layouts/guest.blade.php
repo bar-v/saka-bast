@@ -21,7 +21,8 @@
         <div>
             <a href="/">
                 {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
-                <img src="/image/anri1.svg" alt="" width="150px" height="150px">
+                <img src="/image/image.svg" alt="" width="150px" height="150px" viewBox="0 0 900.000000 905.000000"
+                preserveAspectRatio="xMidYMid meet">>
             </a>
         </div>
 

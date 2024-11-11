@@ -1,4 +1,4 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 885.000000 805.000000"
+<svg id="Layer_1" data-name="Layer 1" version="1.1" xmlns="http://www.w3.org/2000/svg" width="85" height="85" viewBox="0 0 895.000000 1005.000000"
 preserveAspectRatio="xMidYMid meet">
     <defs>
       <style>
@@ -67,5 +67,5 @@ preserveAspectRatio="xMidYMid meet">
       <path class="cls-7" d="M310.05,677.54c3.29-6.27,6.96-12.33,10.46-18.49,3.5-6.17,7-12.34,10.49-18.51.49-.86.98-1.73,1.47-2.59,1.47,5.92,2.84,11.87,4.36,17.79.77,2.99,1.57,5.97,2.44,8.93.8,2.71,2.11,5.59,2.36,8.42.1,1.2-.16,2.5-1.02,3.34-1.42,1.39-3.9,1.24-5.73,1.24-4.25,0-8.5,0-12.76,0-4.04,0-8.07.29-12.1-.06.01-.02.03-.05.04-.07Z" data-index="11" style="visibility: visible;"></path>
       <path class="cls-1" d="M639.85,656.65l-.17.02c1.19-8.51,2.65-16.98,4.1-25.45.78-4.55.91-9.87,6.79-10.05,1.6-.05,3.18.26,4.76.49,2.6.38,5.24.55,7.79,1.21,2.55.66,5.05,1.87,6.68,3.93,1.82,2.31,2.34,5.37,2.57,8.3.28,3.54.2,7.25-1.34,10.44-1.79,3.71-5.39,6.29-9.25,7.74-6.83,2.56-14.74,2.59-21.93,3.38Z" data-index="12" style="visibility: visible; opacity: 1;"></path>
     </g>
-    <text class="cls-10" transform="translate(201.13 836.1)"><tspan x="0" y="0">ARSIP NASIONAL </tspan><tspan x="-68.52" y="97.82">REPUBLIK INDONESIA</tspan></text>
-  </svg>
+    <text class="cls-10" transform="translate(201.13 836.1)"><tspan x="0" y="0">ARSIP NASIONAL </tspan><tspan x="-68.52" y="97.82">REPUBLIK INDONESIA</tspan></text>  
+</svg>

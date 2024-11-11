@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<style>
+    body{
+        background-color: white;
+    }
+</style>
 <x-app-layout>
     <style>
         .ibu {

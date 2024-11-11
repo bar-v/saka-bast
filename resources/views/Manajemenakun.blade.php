@@ -1,4 +1,5 @@
 <x-app-layout>
+    <br class="p-2%">
     <!-- Containerny -->
     <div class="flex justify-center items-center min-h-screen">
         <!-- kotak putih  -->
@@ -8,7 +9,7 @@
                 <div class="border-b pb-2 mb-4">
                     <h3 class="text-lg font-semibold">Info Dasar</h3>
                 </div>
-
+                
                 <!-- Informasi Pribadi -->
                 <div class="mb-2">
                     <h4 class="text-base font-bold mb-2">PERSONAL INFORMATION <button class="ml-2 text-sm bg-gray-200 px-2 py-1 rounded-lg">Edit</button></h4>
