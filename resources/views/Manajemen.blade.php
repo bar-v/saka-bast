@@ -34,7 +34,7 @@
         }
 
         .pencari label {
-            color: white;
+            color: black;
         }
 
         .background-box {
