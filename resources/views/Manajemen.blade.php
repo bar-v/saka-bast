@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <x-app-layout>
 =======
+=======
+
+>>>>>>> 27db2db4010fafb58faa328503361cc95c70080a
 <head>
     <!-- Tambahkan link ke Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Tambahkan jQuery dan Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<<<<<<< HEAD
     
 >>>>>>> 584556217b83baf75a318202bba63c33747f7964
+=======
+
+>>>>>>> 27db2db4010fafb58faa328503361cc95c70080a
     <style>
         /* Gaya tambahan untuk header */
         .header-bg {
-            background-color: #2C2F33; /* Warna gelap atau warna lain yang sesuai */
+            background-color: #2C2F33;
+            /* Warna gelap atau warna lain yang sesuai */
             padding: 20px;
             color: white;
             text-align: center;
@@ -39,7 +48,7 @@
         }
 
         .pencari label {
-            color: white;
+            color: black;
         }
 
 <<<<<<< HEAD
@@ -209,7 +218,8 @@
         
 =======
         <!-- Modal -->
-        <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+        <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -219,19 +229,16 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="{{ route('importarsip') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+
                             <div class="form-group">
-                                <label for="fileUpload">Choose File</label>
-                                <input type="file" class="form-control" id="fileUpload">
+                                <input type="file" name="file" required="required">
                             </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <input type="text" class="form-control" id="description" placeholder="Enter a description" maxlength="100">
-                            </div>
+                            <button type="submit">Import</button>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="saveButton">Save</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
@@ -239,7 +246,8 @@
         </div>
 
         <!-- Tombol Import dengan pemanggilan modal -->
-        <button type="button" class="btn btn-success tombol1" data-toggle="modal" data-target="#importModal">Import</button>
+        <button type="button" class="btn btn-success tombol1" data-toggle="modal"
+            data-target="#importModal">Import</button>
 
         <!-- Tombol Edit -->
         <button type="button" class="btn btn-primary tombol2">Edit</button>

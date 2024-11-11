@@ -5,39 +5,45 @@ namespace App\Imports;
 use App\Models\Arsip;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
+use PhpOffice\PhpSpreadsheet\Cell\DefaultValueBinder;
 
-class ArsipImport implements ToModel, WithHeadingRow
+class ArsipImport extends DefaultValueBinder implements ToModel, WithHeadingRow, WithCustomValueBinder
 {
+    public function headingRow(): int
+    {
+        return 1;
+    }
+
     public function model(array $row)
     {
+        dd($row);
 
-        $cleanValue = function ($value) {
-            return $value === '-' ? '' : $value;
-        };
+        // $cleanValue = function ($value) {
+        //     return $value === '-' ? null : $value;
+        // };
 
-        // dd($row);
-        // Mapping kolom Excel ke kolom di database melalui model Arsip
         return new Arsip([
-            'nomor_arsip' => $cleanValue($row[0]),
-            'kode_pelaksana' => $cleanValue($row[1]),
-            'kode_klasifikasi' => $cleanValue($row[2]),
-            'kode_satker' => $cleanValue($row[3]),
-            'nama_unit_pengolah' => $cleanValue($row[4]),
-            'uraian_informasi_arsip' => $cleanValue($row[5]),
-            'tahun_awal' => $cleanValue($row[6]),
-            'tahun_akhir' => $cleanValue($row[7]),
-            'tingkat_perkembangan' => $cleanValue($row[8]),
-            'media_simpan' => $cleanValue($row[9]),
-            'jumlah_berkas' => $cleanValue($row[10]),
-            'kondisi_fisik' => $cleanValue($row[11]),
-            'ukuran' => $cleanValue($row[12]),
-            'keterangan' => $cleanValue($row[13]),
-            'ruang' => $cleanValue($row[14]),
-            'lemari' => $cleanValue($row[15]),
-            'boks' => $cleanValue($row[16]),
-            'jenis_arsip' => $cleanValue($row[17]),
-            'alih_media' => $cleanValue($row[18]),
+
+            'nomor_arsip' => ($row['nomor_arsip']),
+            'kode_pelaksana' => ($row['kode_pelaksana']),
+            'kode_klasifikasi' => ($row['kode_klasifikasi']),
+            'kode_satker' => ($row['kode_satker']),
+            'nama_unit_pengolah' => ($row['nama_unit_pengolah']),
+            'uraian_informasi_arsip' => ($row['uraian_informasi_arsip']),
+            'tahun_awal' => ($row['tahun_awal']),
+            'tahun_akhir' => ($row['tahun_akhir'] === '-' ? null : $row['tahun_akhir']),
+            'tingkat_perkembangan' => ($row['tingkat_perkembangan']),
+            'media_simpan' => ($row['media_simpan']),
+            'jumlah_berkas' => ($row['jumlah_berkas']),
+            'kondisi_fisik' => ($row['kondisi_fisik']),
+            'ukuran' => ($row['ukuran']),
+            'keterangan' => ($row['keterangan']),
+            'ruang' => ($row['ruang']),
+            'lemari' => ($row['lemari']),
+            'boks' => ($row['boks']),
+            'jenis_arsip' => ($row['jenis_arsip']),
+            'alih_media' => ($row['alih_media']),
         ]);
     }
 }
