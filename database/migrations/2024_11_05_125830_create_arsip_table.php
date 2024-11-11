@@ -32,7 +32,7 @@ return new class extends Migration
             $table->integer('boks');
             $table->string('jenis_arsip');
             $table->string('alih_media');
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 
