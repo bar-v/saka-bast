@@ -1,6 +1,5 @@
 <x-app-layout>
-   
-
+    <br class="p-2%">
     <!-- Containerny -->
     <div class="flex justify-center items-center min-h-screen">
         <!-- kotak putih  -->

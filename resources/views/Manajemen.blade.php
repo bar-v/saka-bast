@@ -1,8 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 
 <x-app-layout>
+=======
+<head>
+    <!-- Tambahkan link ke Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tambahkan jQuery dan Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+>>>>>>> 584556217b83baf75a318202bba63c33747f7964
     <style>
+        /* Gaya tambahan untuk header */
+        .header-bg {
+            background-color: #2C2F33; /* Warna gelap atau warna lain yang sesuai */
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        /* Gaya untuk tombol dan tampilan lainnya tetap sama */
         .ibu {
             padding-top: 2%;
             display: flex;
@@ -23,6 +42,7 @@
             color: white;
         }
 
+<<<<<<< HEAD
         .tombol1,
         .tombol2,
         .tombol3 {
@@ -132,6 +152,8 @@
         }
 
         /* Kotak putih sebagai latar belakang */
+=======
+>>>>>>> 584556217b83baf75a318202bba63c33747f7964
         .background-box {
             width: 100%;
             max-width: 95%;
@@ -142,13 +164,9 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             overflow: auto;
             margin: 20px auto;
-            /* Centering the box horizontally */
-            z-index: 10;
-            /* Ensure it appears above other content */
             position: relative;
         }
 
-        /* Gaya tabel */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -170,9 +188,13 @@
             background-color: #f9f9f9;
         }
     </style>
+</head>
+
+<x-app-layout>
 
     <!-- Baris tombol dan pencarian -->
     <div class="ibu">
+<<<<<<< HEAD
 
         <div class="tombol1">
             <a href=""><button>Import</button></a>
@@ -185,6 +207,44 @@
             <a href="{{ route('arsipexport') }}"><button type="button">Export</button></a>
         </div>
         
+=======
+        <!-- Modal -->
+        <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="importModalLabel">File Upload</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="fileUpload">Choose File</label>
+                                <input type="file" class="form-control" id="fileUpload">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" id="description" placeholder="Enter a description" maxlength="100">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tombol Import dengan pemanggilan modal -->
+        <button type="button" class="btn btn-success tombol1" data-toggle="modal" data-target="#importModal">Import</button>
+
+        <!-- Tombol Edit -->
+        <button type="button" class="btn btn-primary tombol2">Edit</button>
+
+>>>>>>> 584556217b83baf75a318202bba63c33747f7964
         <!-- Pencarian berada di ujung kanan dengan teks label putih -->
         <div class="pencari">
             <label for="search" class="mr-2">Search:</label>
@@ -195,7 +255,6 @@
     <!-- Kotak putih sebagai latar belakang tabel -->
     <div class="flex justify-center items-center min-h-screen">
         <div class="background-box">
-            <!-- Tabel -->
             <table>
                     <tr>
                         <th>NO ARSIP</th>
@@ -206,7 +265,6 @@
                     </tr>
                     @foreach ($arsip as $item)
                         <tr>
-                            {{-- <td>{{ $item->id }}</td> --}}
                             <td>{{ $item->nomor_arsip }}</td>
                             <td>{{ $item->kode_pelaksana }}</td>
                             <td>{{ $item->kode_klasifikasi }}</td>
@@ -214,6 +272,10 @@
                             <td>{{ $item->nama_unit_pengolah }}</td>
                         </tr>
                     @endforeach
+<<<<<<< HEAD
+=======
+                </tbody>
+>>>>>>> 584556217b83baf75a318202bba63c33747f7964
             </table>
         </div>
     </div>
