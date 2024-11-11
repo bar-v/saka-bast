@@ -70,4 +70,4 @@ Route::get('Manajemen/import', function () {
 });
 
 //Laravel Export Excel Route
-Route::get('/exportarsip','ArsipController@index')->name('exportarsip');
+Route::get('/arsipexport','ArsipController@arsipexport')->name('arsipexport');

@@ -24,7 +24,8 @@
         }
 
         .tombol1,
-        .tombol2 {
+        .tombol2,
+        .tombol3 {
             flex-basis: 130px;
             display: flex;
             justify-content: center;
@@ -81,6 +82,34 @@
 
         .tombol2::before,
         .tombol2::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+            width: 150%;
+        }
+
+        .tombol3 {
+            position: relative;
+            padding: 10px 22px;
+            background-color: #1ed363;
+            border-radius: 6px;
+            color: white;
+            border: none;
+            font-size: 18;
+            font-weight: 400;
+            box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .tombol3:active {
+            transform: scale(0.96);
+        }
+
+        .tombol3::before,
+        .tombol3::after {
             content: "";
             position: absolute;
             left: 50%;
@@ -146,12 +175,16 @@
     <div class="ibu">
 
         <div class="tombol1">
-            <a href="{{ route('exportarsip') }}"><button type="submit">Import</button></a>
+            <a href=""><button>Import</button></a>
 
         </div>
         <div class="tombol2">
             <a href=""><button type="button">Edit</button></a>
         </div>
+        <div class="tombol3">
+            <a href="{{ route('arsipexport') }}"><button type="button">Export</button></a>
+        </div>
+        
         <!-- Pencarian berada di ujung kanan dengan teks label putih -->
         <div class="pencari">
             <label for="search" class="mr-2">Search:</label>
