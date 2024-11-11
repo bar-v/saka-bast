@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Manajemen Arsip') }}
-        </h2>
-    </x-slot>
-    <br>
-
+<head>
+    <!-- Tambahkan link ke Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tambahkan jQuery dan Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
     <style>
+        /* Gaya tambahan untuk header */
+        .header-bg {
+            background-color: #2C2F33; /* Warna gelap atau warna lain yang sesuai */
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        /* Gaya untuk tombol dan tampilan lainnya tetap sama */
         .ibu {
             padding-top: 2%;
             display: flex;
@@ -30,86 +37,6 @@
             color: white;
         }
 
-        .tombol1,
-        .tombol2 {
-            flex-basis: 130px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 5px;
-            color: white;
-        }
-
-        .tombol1 {
-            position: relative;
-            padding: 10px 22px;
-            background-color: #1ed363;
-            border-radius: 6px;
-            color: white;
-            border: none;
-            font-size: 18;
-            font-weight: 400;
-            box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .tombol1:active {
-            transform: scale(0.96);
-        }
-
-        .tombol1::before,
-        .tombol1::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 100%;
-            width: 150%;
-        }
-
-        .tombol2 {
-            position: relative;
-            padding: 10px 22px;
-            background-color: #008cff;
-            border-radius: 6px;
-            color: white;
-            border: none;
-            font-size: 18;
-            font-weight: 400;
-            box-shadow: 0px 5px 10px rgb(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .tombol2:active {
-            transform: scale(0.96);
-        }
-
-        .tombol2::before,
-        .tombol2::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 100%;
-            width: 150%;
-        }
-
-        button:hover {
-            background-color: darkgray;
-            border-radius: 10px;
-            padding: 6px;
-            color: black;
-        }
-
-        input[type=text] {
-            border-radius: 5px;
-            padding: 5px;
-            width: 200px;
-        }
-
-        /* Kotak putih sebagai latar belakang */
         .background-box {
             width: 100%;
             max-width: 95%;
@@ -120,13 +47,9 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             overflow: auto;
             margin: 20px auto;
-            /* Centering the box horizontally */
-            z-index: 10;
-            /* Ensure it appears above other content */
             position: relative;
         }
 
-        /* Gaya tabel */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -148,41 +71,68 @@
             background-color: #f9f9f9;
         }
     </style>
+</head>
+
+<x-app-layout>
+    <!-- Tambahkan kelas header-bg untuk mengatur latar belakang gelap -->
+    <x-slot name="header">
+        <div class="header-bg">
+            <h2 class="font-semibold text-xl leading-tight">
+                {{ __('Manajemen Arsip') }}
+            </h2>
+        </div>
+    </x-slot>
+
+    <br>
 
     <!-- Baris tombol dan pencarian -->
     <div class="ibu">
-
-        <div class="tombol1">
-            <button type="submit">Import</button>
-
+        <!-- Modal -->
+        <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="importModalLabel">File Upload</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="fileUpload">Choose File</label>
+                                <input type="file" class="form-control" id="fileUpload">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" id="description" placeholder="Enter a description" maxlength="100">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="tombol2">
-            <button type="button">Edit</button>
-        </div>
+
+        <!-- Tombol Import dengan pemanggilan modal -->
+        <button type="button" class="btn btn-success tombol1" data-toggle="modal" data-target="#importModal">Import</button>
+
+        <!-- Tombol Edit -->
+        <button type="button" class="btn btn-primary tombol2">Edit</button>
+
         <!-- Pencarian berada di ujung kanan dengan teks label putih -->
         <div class="pencari">
             <label for="search" class="mr-2">Search:</label>
             <input type="text" id="search" placeholder="Masukkan yang dicari...">
         </div>
-
-        <div class="input-group">
-
-            <form action="{{ route('importarsip') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-
-                <input type="file" name="file" required="required">
-                <div class="">
-                    <button type="submit">Import</button>
-                </div>
-            </form>
-        </div>
-
     </div>
 
     <!-- Kotak putih sebagai latar belakang tabel -->
     <div class="flex justify-center items-center min-h-screen">
         <div class="background-box">
-            <!-- Tabel -->
             <table>
                 <thead>
                     <tr>
@@ -210,7 +160,6 @@
                 <tbody>
                     @foreach ($arsip as $item)
                         <tr>
-                            {{-- <td>{{ $item->id }}</td> --}}
                             <td>{{ $item->nomor_arsip }}</td>
                             <td>{{ $item->kode_pelaksana }}</td>
                             <td>{{ $item->kode_klasifikasi }}</td>
@@ -232,29 +181,6 @@
                             <td>{{ $item->alih_media }}</td>
                         </tr>
                     @endforeach
-                    {{-- <!-- Baris tabel untuk data (bisa ditambahkan lebih banyak sesuai kebutuhan) -->
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <!-- Tambahkan baris lain jika diperlukan --> --}}
                 </tbody>
             </table>
         </div>
