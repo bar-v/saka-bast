@@ -123,7 +123,7 @@
 
     <!-- Kotak putih sebagai latar belakang tabel -->
     <div class="flex justify-center items-center min-h-screen">
-        <div class="background-box">
+        <div class="background-box shadow-lg">
             <table>
                 <thead>
                     <tr>

@@ -3,7 +3,7 @@
     <!-- Containerny -->
     <div class="flex justify-center items-center min-h-screen">
         <!-- kotak putih  -->
-        <div class="bg-white w-3/4 h-[700px] rounded-lg shadow-lg p-6 flex">
+        <div class="bg-white w-3/4 h-[700px] rounded-lg shadow-inner shadow-lg p-6 flex">
             <!-- Text -->
             <div class="w-1/2 pr-8">
                 <h1 class="text-3xl font-bold mb-2">Hubungi Kami</h1>
