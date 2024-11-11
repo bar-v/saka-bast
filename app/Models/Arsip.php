@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Arsip extends Model
 {
+    public $timestamp = false;
+
     use HasFactory;
 
     protected $table = "arsip";
@@ -31,5 +33,5 @@ class Arsip extends Model
         'boks',
         'jenis_arsip',
         'alih_media'
-    ]; // Tambahkan nama kolom lain yang diizinkan sesuai database
+    ];
 }
