@@ -3,7 +3,7 @@
     <!-- Containerny -->
     <div class="flex justify-center items-center min-h-screen">
         <!-- kotak putih  -->
-        <div class="bg-white w-3/4 h-[700px] rounded-lg shadow-lg p-6 flex">
+        <div class="bg-white w-3/4 h-[700px] rounded-lg shadow-xl p-6 flex">
             <div class="w-full">
                 <!-- Header Informasi -->
                 <div class="border-b pb-2 mb-4">

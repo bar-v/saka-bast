@@ -8,6 +8,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <!-- ini untuk halaman -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+
     <style>
         /* Gaya tambahan untuk header */
         .header-bg {
@@ -36,7 +41,7 @@
         }
 
         .pencari label {
-            color: white;
+            color: black;
         }
 
         .background-box {
@@ -73,6 +78,18 @@
             background-color: #f9f9f9;
         }
     </style>
+
+        <!-- ini untuk halaman -->
+        <script>
+    $(document).ready(function() {
+        $('table').DataTable({
+            "pageLength": 25,  // Mengatur jumlah baris per halaman
+            "lengthChange": false  // Menonaktifkan opsi perubahan jumlah baris per halaman
+        });
+    });
+</script>
+
+
 </head>
 
 <x-app-layout>
@@ -135,8 +152,8 @@
 
     <!-- Kotak putih sebagai latar belakang tabel -->
     <div class="flex justify-center items-center min-h-screen">
-        <div class="background-box">
-            <table>
+        <div class="background-box shadow-lg">
+        <table id="myTable">
                 <thead>
                     <tr>
                         <th>NO ARSIP</th>
