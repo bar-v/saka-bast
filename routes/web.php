@@ -13,6 +13,10 @@ Route::get('/beranda', function () {
     return view('beranda');
 });
 
+Route::get('/datainsert', function () {
+    return view('datainsert');
+});
+
 Route::get('/login', function () {
     return view('login');
 });
@@ -57,8 +61,8 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 //Laravel Excel Import Route
-Route::get('arsip/import', [App\Http\Controllers\ArsipController::class, 'index']);
-Route::post('arsip/import', [App\Http\Controllers\ArsipController::class, 'importExcelData']);
+Route::get('/Manajemen', [App\Http\Controllers\ArsipController::class, 'index'])->name('Manajemen');
+Route::post('/importarsip', [App\Http\Controllers\ArsipController::class, 'importArsipExcel'])->name('importarsip');
 // Route::post('Manajemen', [ArsipController::class, 'import'])->name('Manajemen.import');
 
 Route::get('Manajemen/import', function () {
