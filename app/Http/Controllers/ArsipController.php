@@ -18,24 +18,30 @@ class ArsipController extends Controller
 
     public function importArsipExcel(Request $request)
     {
-        $file = $request->file('file');
-        $namaFile = $file->getClientOriginalName();
-        $file->move('DataArsip', $namaFile);
-        //Validasi file xlsx, xls dan csv
-        Excel::import(new ArsipImport, public_path('/DataArsip/' . $namaFile));
-        return redirect('/Manajemen');
-        // Redirect kembali dengan pesan sukses
 
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv'
+        ]);
 
-        // Proses import file dengan Laravel Excel
-        // Excel::import(new ArsipImport, $request->file('import_file'));
-        // $request->validate([
-        //     'import_file' => 'required|mimes:xlsx, xls, csv',
-        //     'file'
-        // ]);
+        try {
+            // Debug: Load the Excel file and dump the first few rows
+            $array = Excel::toArray(new ArsipImport, $request->file('file'));
+            // \Log::info('Excel data:', ['first_rows' => array_slice($array[0], 0, 3)]);
 
+            Excel::import(new ArsipImport, $request->file('file'));
 
+            return redirect()->back()->with('success', 'Data arsip berhasil diimport!');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            $errors = collect($failures)->map(function ($failure) {
+                return "Baris {$failure->row()}: {$failure->errors()[0]}";
+            })->join('<br>');
+
+            return redirect()->back()
+                ->with('error', "Gagal import data:<br>{$errors}")
+                ->with('debug_data', $array[0] ?? []); // Pass the data to the view for debugging
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
-
-    // public function 
 }

@@ -34,4 +34,16 @@ class Arsip extends Model
         'jenis_arsip',
         'alih_media'
     ];
+
+    // Mutator - sebelum disimpan ke database
+    public function setTahunAkhirAttribute($value)
+    {
+        $this->attributes['tahun_akhir'] = ($value === '-' || empty($value)) ? null : $value;
+    }
+
+    // Accessor - ketika mengambil data
+    public function getTahunAkhirAttribute($value)
+    {
+        return $value ?? '-';
+    }
 }
