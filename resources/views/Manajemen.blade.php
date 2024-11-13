@@ -79,15 +79,15 @@
         }
     </style>
 
-        <!-- ini untuk halaman -->
-        <script>
-    $(document).ready(function() {
-        $('table').DataTable({
-            "pageLength": 25,  // Mengatur jumlah baris per halaman
-            "lengthChange": false  // Menonaktifkan opsi perubahan jumlah baris per halaman
+    <!-- ini untuk halaman -->
+    <script>
+        $(document).ready(function() {
+            $('table').DataTable({
+                "pageLength": 25, // Mengatur jumlah baris per halaman
+                "lengthChange": false // Menonaktifkan opsi perubahan jumlah baris per halaman
+            });
         });
-    });
-</script>
+    </script>
 
 
 </head>
@@ -110,25 +110,29 @@
                     <div class="modal-body">
                         <form action="{{ route('importarsip') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-
                             <div class="form-group">
-                                <input type="file" name="file" required="required">
+                                <label>Upload File Excel</label>
+                                <input type="file" name="file" class="form-control" required>
                             </div>
-                            <button type="submit">Import</button>
+
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {!! session('error') !!}
+                                </div>
+                            @endif
+
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
+                            <button type="submit" class="btn btn-primary">Import</button>
+                            <a href="{{ route('arsip.template') }}" class="btn btn-secondary">Download Template</a>
                         </form>
                     </div>
 
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
 
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {!! session('error') !!}
-                        </div>
-                    @endif
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     </div>
@@ -153,56 +157,26 @@
     <!-- Kotak putih sebagai latar belakang tabel -->
     <div class="flex justify-center items-center min-h-screen">
         <div class="background-box shadow-lg">
-        <table id="myTable">
-                <thead>
-                    <tr>
-                        <th>NO ARSIP</th>
-                        <th>KODE PELAKSANA</th>
-                        <th>KODE KLASIFIKASI</th>
-                        <th>KODE SATKER</th>
-                        <th>NAMA UNIT PENGOLAH</th>
-                        <th>URAIAN INFORMASI ARSIP</th>
-                        <th>TAHUN AWAL</th>
-                        <th>TAHUN AKHIR</th>
-                        <th>TINGKAT PERKEMBANGAN ARSIP</th>
-                        <th>MEDIA SIMPAN</th>
-                        <th>JUMLAH BERKAS</th>
-                        <th>KONDISI FISIK</th>
-                        <th>UKURAN</th>
-                        <th>KETERANGAN</th>
-                        <th>RUANG</th>
-                        <th>LEMARI</th>
-                        <th>BOKS</th>
-                        <th>JENIS ARSIP</th>
-                        <th>ALIH MEDIA</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($arsip as $item)
+            @if (isset($headers) && isset($data))
+                <table class="table">   
+                    <thead>
                         <tr>
-                            <td>{{ $item->nomor_arsip }}</td>
-                            <td>{{ $item->kode_pelaksana }}</td>
-                            <td>{{ $item->kode_klasifikasi }}</td>
-                            <td>{{ $item->kode_satker }}</td>
-                            <td>{{ $item->nama_unit_pengolah }}</td>
-                            <td>{{ $item->uraian_informasi_arsip }}</td>
-                            <td>{{ $item->tahun_awal }}</td>
-                            <td>{{ $item->tahun_akhir }}</td>
-                            <td>{{ $item->tingkat_perkembangan }}</td>
-                            <td>{{ $item->media_simpan }}</td>
-                            <td>{{ $item->jumlah_berkas }}</td>
-                            <td>{{ $item->kondisi_fisik }}</td>
-                            <td>{{ $item->ukuran }}</td>
-                            <td>{{ $item->keterangan }}</td>
-                            <td>{{ $item->ruang }}</td>
-                            <td>{{ $item->lemari }}</td>
-                            <td>{{ $item->boks }}</td>
-                            <td>{{ $item->jenis_arsip }}</td>
-                            <td>{{ $item->alih_media }}</td>
+                            @foreach ($headers as $header)
+                                <th>{{ $header }}</th>
+                            @endforeach
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $row)
+                            <tr>
+                                @foreach ($row as $cell)
+                                    <td>{{ $cell }}</td>
+                                @endforeach
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
         </div>
     </div>
 

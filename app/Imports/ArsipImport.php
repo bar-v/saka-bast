@@ -3,63 +3,103 @@
 namespace App\Imports;
 
 use App\Models\Arsip;
-use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 
-class ArsipImport implements ToModel, WithHeadingRow, WithValidation
+class ArsipImport implements ToModel, WithStartRow, WithValidation, SkipsEmptyRows
 {
     /**
-     * Tentukan aturan validasi.
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function model(array $row)
+    {
+        // Pastikan semua index ada sebelum mengakses array
+        if (
+            !isset($row[0]) || !isset($row[1]) || !isset($row[2]) ||
+            !isset($row[3]) || !isset($row[4]) || !isset($row[5])
+        ) {
+            return null;
+        }
+
+        return new Arsip([
+            'nomor_arsip'            => trim($row[0] ?? ''),
+            'kode_pelaksana'         => trim($row[1] ?? ''),
+            'kode_klasifikasi'       => trim($row[2] ?? ''),
+            'kode_satker'            => trim($row[3] ?? ''),
+            'nama_unit_pengolah'     => trim($row[4] ?? ''),
+            'uraian_informasi_arsip' => trim($row[5] ?? ''),
+            'tahun_awal'             => !empty($row[6]) ? trim($row[6]) : null,
+            'tahun_akhir'            => !empty($row[7]) ? trim($row[7]) : null,
+            'tingkat_perkembangan'   => trim($row[8] ?? ''),
+            'media_simpan'           => trim($row[9] ?? ''),
+            'jumlah_berkas'          => trim($row[10] ?? ''),
+            'kondisi_fisik'          => trim($row[11] ?? ''),
+            'ukuran'                 => trim($row[12] ?? ''),
+            'keterangan'             => trim($row[13] ?? ''),
+            'ruang'                  => trim($row[14] ?? ''),
+            'lemari'                 => trim($row[15] ?? ''),
+            'boks'                   => trim($row[16] ?? ''),
+            'jenis_arsip'            => trim($row[17] ?? ''),
+            'alih_media'             => trim($row[18] ?? ''),
+
+        ]);
+    }
+
+    /**
+     * @return int
+     */
+    public function startRow(): int
+    {
+        return 2;
+    }
+
+    /**
+     * @return array
      */
     public function rules(): array
     {
         return [
-            'nomor_arsip' => 'required',
-            'kode_pelaksana' => 'required',
-            'kode_klasifikasi' => 'required',
-            'nama_unit_pengolah' => 'required',
-            'uraian_informasi_arsip' => 'required',
-            'tahun_awal' => 'required|integer',
-            'tingkat_perkembangan' => 'required',
-            'media_simpan' => 'required',
-            'jumlah_berkas' => 'required|integer',
-            'kondisi_fisik' => 'required',
-            'ukuran' => 'required',
-            'keterangan' => 'required',
-            'ruang' => 'required',
-            'lemari' => 'required',
-            'boks' => 'required',
-            'jenis_arsip' => 'required',
-            'alih_media' => 'required',
+            '0' => ['nullable', 'integer'],
+            '1' => ['nullable', 'string'],
+            '2' => ['nullable', 'string'],
+            '3' => ['nullable', 'string'],
+            '4' => ['nullable', 'string'],
+            '5' => ['nullable', 'string '],
+            '6' => ['nullable', 'numeric', 'digits:4'],
+            '7' => ['nullable', 'numeric', 'digits:4'],
+            '8' => ['nullable', 'string'],
+            '9' => ['nullable', 'string'],
+            '10' => ['nullable', 'string'],
+            '11' => ['nullable', 'string'],
+            '12' => ['nullable', 'string'],
+            '13' => ['nullable', 'string'],
+            '14' => ['nullable', 'string'],
+            '15' => ['nullable', 'integer'],
+            '16' => ['nullable', 'integer'],
+            '17' => ['nullable', 'string'],
         ];
     }
 
     /**
-     * Simpan data ke dalam model Arsip.
+     * @return array
      */
-    public function model(array $row)
+    public function customValidationMessages()
     {
-        return new Arsip([
-            'nomor_arsip' => $row['nomor_arsip'],
-            'kode_pelaksana' => $row['kode_pelaksana'],
-            'kode_klasifikasi' => $row['kode_klasifikasi'],
-            'nama_unit_pengolah' => $row['nama_unit_pengolah'],
-            'uraian_informasi_arsip' => $row['uraian_informasi_arsip'],
-            'tahun_awal' => $row['tahun_awal'],
-            'tahun_akhir' => $row['tahun_akhir'] ?? null,
-            'tingkat_perkembangan' => $row['tingkat_perkembangan'],
-            'media_simpan' => $row['media_simpan'],
-            'jumlah_berkas' => $row['jumlah_berkas'],
-            'kondisi_fisik' => $row['kondisi_fisik'],
-            'ukuran' => $row['ukuran'],
-            'keterangan' => $row['keterangan'],
-            'ruang' => $row['ruang'],
-            'lemari' => $row['lemari'],
-            'boks' => $row['boks'],
-            'jenis_arsip' => $row['jenis_arsip'],
-            'alih_media' => $row['alih_media'],
-        ]);
+        return [
+            '0.required' => 'Kolom Nomor Arsip pada baris :row wajib diisi',
+            '1.required' => 'Kolom Kode Pelaksana pada baris :row wajib diisi',
+            '2.required' => 'Kolom Kode Klasifikasi pada baris :row wajib diisi',
+            '3.required' => 'Kolom Kode Satker pada baris :row wajib diisi',
+            '4.required' => 'Kolom Nama Unit Pengolah pada baris :row wajib diisi',
+            '5.required' => 'Kolom Uraian Informasi Arsip pada baris :row wajib diisi',
+            '6.numeric' => 'Kolom Tahun Awal pada baris :row harus berupa angka',
+            '6.digits' => 'Kolom Tahun Awal pada baris :row harus 4 digit',
+            '7.numeric' => 'Kolom Tahun Akhir pada baris :row harus berupa angka',
+            '7.digits' => 'Kolom Tahun Akhir pada baris :row harus 4 digit'
+        ];
     }
 }

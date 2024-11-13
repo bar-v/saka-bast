@@ -62,8 +62,8 @@ require __DIR__ . '/auth.php';
 
 //Laravel Excel Import Route
 Route::get('/Manajemen', [App\Http\Controllers\ArsipController::class, 'index'])->name('Manajemen');
-Route::post('/importarsip', [App\Http\Controllers\ArsipController::class, 'importArsipExcel'])->name('importarsip');
-// Route::post('Manajemen', [ArsipController::class, 'import'])->name('Manajemen.import');
+Route::post('/Manajemen.Import', [App\Http\Controllers\ArsipController::class, 'import'])->name('importarsip');
+Route::get('/arsip/download-template', [ArsipController::class, 'downloadTemplate'])->name('arsip.template');
 
 Route::get('Manajemen/import', function () {
     return (view('Manajemen/import'));
