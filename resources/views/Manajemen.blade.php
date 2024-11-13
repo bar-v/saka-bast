@@ -3,9 +3,9 @@
 
 <head>
     
-    <!-- Tambahkan link ke Bootstrap CSS -->
+    <!--link ke Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Tambahkan jQuery dan Bootstrap JS -->
+    <!--jQuery dan Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
@@ -18,13 +18,13 @@
         /* Gaya tambahan untuk header */
         .header-bg {
             background-color: #2C2F33;
-            /* Warna gelap atau warna lain yang sesuai */
+            /* Warna gelap */
             padding: 20px;
             color: white;
             text-align: center;
         }
 
-        /* Gaya untuk tombol dan tampilan lainnya tetap sama */
+        /* Gaya untuk tombol dan tampilan */
         .ibu {
             padding-top: 2%;
             display: flex;
@@ -84,7 +84,7 @@
         <script>
     $(document).ready(function() {
         $('table').DataTable({
-            "pageLength": 25,  // Mengatur jumlah baris per halaman
+            "pageLength": 25,  // jumlah baris per halaman
             "lengthChange": false  // Menonaktifkan opsi perubahan jumlah baris per halaman
         });
     });
@@ -95,7 +95,7 @@
 
 <x-app-layout>
 
-    <!-- Baris tombol dan pencarian -->
+    <!-- tombol dan pencarian -->
     <div class="ibu">
         <!-- Modal -->
         <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
@@ -125,7 +125,7 @@
             </div>
         </div>
 
-        <!-- Tombol Import dengan pemanggilan modal -->
+        <!-- Tombol Import modal -->
         <button type="button" class="btn btn-success tombol1" data-toggle="modal"
             data-target="#importModal">Import</button>
 
@@ -133,7 +133,7 @@
         <button type="button" class="btn btn-primary tombol2">Edit</button>
     </div>
 
-    <!-- Kotak putih sebagai latar belakang tabel -->
+    <!-- Kotak putih blakang tabel -->
     <div class="flex justify-center items-center min-h-screen">
         <div class="background-box shadow-lg">
         <table id="myTable">
