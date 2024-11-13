@@ -36,7 +36,7 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6 w-24 h-24 col-white items-center">
+            <div class="hidden sm:flex sm:items-center sm:ms-6 w-24 h-24 col-black items-center">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="">
@@ -59,7 +59,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
+                            <x-dropdown-link :href="route('logout') "
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
