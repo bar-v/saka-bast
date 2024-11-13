@@ -130,12 +130,6 @@
 
         <!-- Tombol Edit -->
         <button type="button" class="btn btn-primary tombol2">Edit</button>
-
-        <!-- Pencarian berada di ujung kanan dengan teks label putih -->
-        <div class="pencari">
-            <label for="search" class="mr-2">Search:</label>
-            <input type="text" id="search" placeholder="Masukkan yang dicari...">
-        </div>
     </div>
 
     <!-- Kotak putih sebagai latar belakang tabel -->
