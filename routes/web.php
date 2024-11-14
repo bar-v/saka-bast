@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\ProfileController;
+use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeUnit\FunctionUnit;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -68,3 +70,7 @@ Route::post('/importarsip', [App\Http\Controllers\ArsipController::class, 'impor
 Route::get('Manajemen/import', function () {
     return (view('Manajemen/import'));
 });
+
+//Create Section
+Route::get('/create-Manajemen', [ArsipController::class, 'create'])->name('create-Manajemen');
+Route::post('/simpan-Manajemen', [ArsipController::class, 'store'])->name('simpan-Manajemen');
