@@ -131,6 +131,9 @@
 
         <!-- Tombol Edit -->
         <button type="button" class="btn btn-primary tombol2">Edit</button>
+
+        {{-- tombol delete --}}
+        <button type="button" class="btn btn-primary tombol3">DELETE</button>
     </div>
 
     <!-- Kotak putih blakang tabel -->
