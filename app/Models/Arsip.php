@@ -35,3 +35,4 @@ class Arsip extends Model
         'alih_media'
     ];
 }
+

@@ -130,10 +130,14 @@
             data-target="#importModal">Import</button>
 
         <!-- Tombol Edit -->
+<<<<<<< HEAD
         <button type="button" class="btn btn-primary tombol2">Edit</button>
 
         {{-- tombol delete --}}
         <button type="button" class="btn btn-primary tombol3">DELETE</button>
+=======
+        <a href="{{ route('create-Manajemen') }}"><button type="button" class="btn btn-primary tombol2">Create</button></a>
+>>>>>>> b80541ee9fa4b1a104c938408de1916b75e1c05d
     </div>
 
     <!-- Kotak putih blakang tabel -->
