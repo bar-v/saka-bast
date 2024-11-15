@@ -128,16 +128,8 @@
         <!-- Tombol Import modal -->
         <button type="button" class="btn btn-success tombol1" data-toggle="modal"
             data-target="#importModal">Import</button>
-
-        <!-- Tombol Edit -->
-<<<<<<< HEAD
-        <button type="button" class="btn btn-primary tombol2">Edit</button>
-
-       
-=======
         {{-- tombol create --}}
         <a href="{{ route('create-Manajemen') }}"><button type="button" class="btn btn-primary tombol2">Create</button></a>
->>>>>>> b80541ee9fa4b1a104c938408de1916b75e1c05d
     </div>
 
     <!-- Kotak putih blakang tabel -->
