@@ -190,7 +190,7 @@
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Jumlah Berkas</label>
-                        <input type="number" class="form-control" id= "jumlah_berkas" name="jumlah_berkas" placeholder="Masukkan jumlah berkas">
+                        <input type="text" class="form-control" id= "jumlah_berkas" name="jumlah_berkas" placeholder="Masukkan jumlah berkas">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Kondisi Fisik</label>
