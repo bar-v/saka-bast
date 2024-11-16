@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+
     <style>
         :root {
             --primary-color: #2C3E50;
@@ -33,7 +34,7 @@
         .form-container {
             background: white;
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             padding: 30px;
             margin: 20px auto;
             max-width: 1200px;
@@ -84,7 +85,7 @@
         .submit-btn:hover {
             background: #2980b9;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .floating-submit {
@@ -92,9 +93,9 @@
             bottom: 20px;
             text-align: center;
             padding: 20px;
-            background: rgba(255,255,255,0.9);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -113,15 +114,18 @@
                 <div class="row g-3">
                     <div class="col-md-4">
                         <label class="form-label">Nomor Arsip</label>
-                        <input type="text" class="form-control" id="nomor_arsip" name="nomor_arsip" placeholder="Masukkan nomor arsip">
+                        <input type="number" class="form-control" id="nomor_arsip" name="nomor_arsip"
+                            placeholder="Masukkan nomor arsip">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Kode Pelaksana</label>
-                        <input type="text" class="form-control" id="kode_pelaksana" name="kode_pelaksana" placeholder="Masukkan kode pelaksana">
+                        <input type="text" class="form-control" id="kode_pelaksana" name="kode_pelaksana"
+                            placeholder="Masukkan kode pelaksana">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Kode Klasifikasi</label>
-                        <input type="text" class="form-control" id="kode_klasifikasi" name="kode_klasifikasi" placeholder="Masukkan kode klasifikasi">
+                        <input type="text" class="form-control" id="kode_klasifikasi" name="kode_klasifikasi"
+                            placeholder="Masukkan kode klasifikasi">
                     </div>
                 </div>
             </div>
@@ -132,11 +136,13 @@
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label class="form-label">Kode Satker</label>
-                        <input type="text" class="form-control" id="kode_satker" name="kode_satker" placeholder="Masukkan kode satker">
+                        <input type="text" class="form-control" id="kode_satker" name="kode_satker"
+                            placeholder="Masukkan kode satker">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Nama Unit Pengolah</label>
-                        <textarea class="form-control" id="nama_unit_pengolah" name="nama_unit_pengolah" rows="2" placeholder="Masukkan nama unit pengolah"></textarea>
+                        <textarea class="form-control" id="nama_unit_pengolah" name="nama_unit_pengolah" rows="2"
+                            placeholder="Masukkan nama unit pengolah"></textarea>
                     </div>
                 </div>
             </div>
@@ -147,7 +153,8 @@
                 <div class="row g-3">
                     <div class="col-12">
                         <label class="form-label">Uraian Informasi Arsip</label>
-                        <textarea class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip" rows="3" placeholder="Masukkan uraian informasi arsip"></textarea>
+                        <textarea class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip" rows="3"
+                            placeholder="Masukkan uraian informasi arsip"></textarea>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Tingkat Perkembangan</label>
@@ -171,11 +178,11 @@
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Tahun Awal</label>
-                        <input type="year" class="form-control" id="tahun_awal" name="tahun_awal">
+                        <input type="number" class="form-control" id="tahun_awal" name="tahun_awal">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Tahun Akhir</label>
-                        <input type="year" class="form-control" id="tahun_akhir" name="tahun_akhir">
+                        <input type="number" class="form-control" id="tahun_akhir" name="tahun_akhir">
                     </div>
                 </div>
             </div>
@@ -186,11 +193,13 @@
                 <div class="row g-3">
                     <div class="col-md-4">
                         <label class="form-label">Media Simpan</label>
-                        <input type="text" class="form-control" id= "media_simpan" name="media_simpan" placeholder="Masukkan media simpan">
+                        <input type="text" class="form-control" id= "media_simpan" name="media_simpan"
+                            placeholder="Masukkan media simpan">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Jumlah Berkas</label>
-                        <input type="text" class="form-control" id= "jumlah_berkas" name="jumlah_berkas" placeholder="Masukkan jumlah berkas">
+                        <input type="text" class="form-control" id= "jumlah_berkas" name="jumlah_berkas"
+                            placeholder="Masukkan jumlah berkas">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Kondisi Fisik</label>
@@ -222,7 +231,8 @@
                 <div class="row g-3">
                     <div class="col-12">
                         <label class="form-label">Keterangan</label>
-                        <textarea class="form-control" id= "keterangan" name="keterangan" rows="3" placeholder="Masukkan keterangan tambahan"></textarea>
+                        <textarea class="form-control" id= "keterangan" name="keterangan" rows="3"
+                            placeholder="Masukkan keterangan tambahan"></textarea>
                     </div>
                 </div>
             </div>
@@ -233,15 +243,18 @@
                 <div class="row g-3">
                     <div class="col-md-3">
                         <label class="form-label">Ruang</label>
-                        <input type="text" class="form-control" id= "ruang" name="ruang" placeholder="Nomor/Nama Ruang">
+                        <input type="text" class="form-control" id= "ruang" name="ruang"
+                            placeholder="Nomor/Nama Ruang">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Lemari</label>
-                        <input type="text" class="form-control" id= "lemari" name="lemari" placeholder="Nomor Lemari">
+                        <input type="number" class="form-control" id= "lemari" name="lemari"
+                            placeholder="Nomor Lemari">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Boks</label>
-                        <input type="text" class="form-control" id= "boks" name="boks" placeholder="Nomor Boks">
+                        <input type="text" class="form-control" id= "boks" name="boks"
+                            placeholder="Nomor Boks">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Alih Media</label>

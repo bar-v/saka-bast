@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('kode_satker')->nullable();
             $table->string('nama_unit_pengolah')->nullable();
             $table->string('uraian_informasi_arsip')->nullable();
-            $table->string('tahun_awal')->nullable();
-            $table->string('tahun_akhir')->nullable();
+            $table->year('tahun_awal')->nullable();
+            $table->year('tahun_akhir')->nullable();
             $table->string('tingkat_perkembangan')->nullable();
             $table->string('media_simpan')->nullable();
             $table->string('jumlah_berkas')->nullable();
@@ -44,4 +44,3 @@ return new class extends Migration
         Schema::dropIfExists('arsip');
     }
 };
-
