@@ -78,4 +78,8 @@ Route::post('/simpan-Manajemen', [ArsipController::class, 'store'])->name('simpa
 //Edit Section
 Route::get('/edit-Manajemen/{id}', [ArsipController::class, 'edit'])->name('edit-Manajemen');
 Route::put('/update-Manajemen/{id}', [ArsipController::class, 'update'])->name('update-Manajemen');
-Route::delete('/delete-Manajemen/{id}', [ArsipController::class, 'destroy'])->name('delete-Manajemen');
+
+
+//Delete Section
+Route::delete('delete-Manajemen/{id}', [ArsipController::class, 'destroy'])->name('delete-Manajemen');
+Route::delete('/delete-Manajemen/{id}', [ArsipController::class, 'destroy'])->name('delete-Manajemen')->middleware('auth');

@@ -203,13 +203,21 @@
                             <td>{{ $item->jenis_arsip }}</td>
                             <td>{{ $item->alih_media }}</td>
                             <td>
-                                <a href="{{ route('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
+                                <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
                                     title="Edit">
-                                    <i class="bi bi-pencil-square"></i>
+                                    <i class="bi bi-pencil-square"
+                                        style="background: none; border: none; padding: 0; color: rgb(34, 0, 255);"></i>
                                 </a>|
-                                <a href="" class="btn-action btn-delete" title="Hapus">
-                                    <i class="bi bi-trash"></i>
-                                </a>
+                                <form action="{{ route('delete-Manajemen', $item->id) }}" method="POST"
+                                    style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-action btn-delete" title="Hapus"
+                                        onclick="return confirm('Are you sure you want to delete this item?')"
+                                        style="background: none; border: none; padding: 0; color: red;">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
