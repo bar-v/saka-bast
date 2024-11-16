@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
+use Illuminate\Support\Facades\DB;
 
 class ArsipImport implements ToModel, WithStartRow, WithValidation, SkipsEmptyRows
 {
@@ -17,36 +18,57 @@ class ArsipImport implements ToModel, WithStartRow, WithValidation, SkipsEmptyRo
      */
     public function model(array $row)
     {
-        // Pastikan semua index ada sebelum mengakses array
-        if (
-            !isset($row[0]) || !isset($row[1]) || !isset($row[2]) ||
-            !isset($row[3]) || !isset($row[4]) || !isset($row[5])
-        ) {
-            return null;
+        // Validasi jika record sudah ada berdasarkan field unik
+        $existingRecord = DB::table('arsip')
+            ->where('nomor_arsip', $row['nomor_arsip'])
+            ->where('kode_pelaksana', $row['kode_pelaksana'])
+            ->where('kode_klasifikasi', $row['kode_klasifikasi'])
+            ->where('kode_satker', $row['kode_satker'])
+            ->where('nama_unit_pengolah', $row['nama_unit_pengolah'])
+            ->where('uraian_informasi_arsip', $row['uraian_informasi_arsip'])
+            ->where('tahun_awal', $row['tahun_awal'])
+            ->where('tahun_akhir', $row['tahun_akhir'])
+            ->where('tingkat_pengembangan', $row['tingkat_pengembangan'])
+            ->where('media_simpan', $row['media_simpan'])
+            ->where('jumlah_berkas', $row['jumlah_berkas'])
+            ->where('kondisi_fisik', $row['kondisi_fisik'])
+            ->where('ukuran', $row['ukuran'])
+            ->where('keterangan', $row['keterangan'])
+            ->where('ruang', $row['ruang'])
+            ->where('lemari', $row['lemari'])
+            ->where('boks', $row['boks'])
+            ->where('jenis_arsip', $row['jenis_arsip'])
+            ->where('alih_media', $row['alih_media'])
+            ->first();
+
+
+        if (!$existingRecord) {
+            // Insert record baru jika belum ada
+            return new Arsip([
+                'nomor_arsip'            => trim($row[0] ?? ''),
+                'kode_pelaksana'         => trim($row[1] ?? ''),
+                'kode_klasifikasi'       => trim($row[2] ?? ''),
+                'kode_satker'            => trim($row[3] ?? ''),
+                'nama_unit_pengolah'     => trim($row[4] ?? ''),
+                'uraian_informasi_arsip' => trim($row[5] ?? ''),
+                'tahun_awal'             => !empty($row[6]) ? trim($row[6]) : null,
+                'tahun_akhir'            => !empty($row[7]) ? trim($row[7]) : null,
+                'tingkat_perkembangan'   => trim($row[8] ?? ''),
+                'media_simpan'           => trim($row[9] ?? ''),
+                'jumlah_berkas'          => trim($row[10] ?? ''),
+                'kondisi_fisik'          => trim($row[11] ?? ''),
+                'ukuran'                 => trim($row[12] ?? ''),
+                'keterangan'             => trim($row[13] ?? ''),
+                'ruang'                  => trim($row[14] ?? ''),
+                'lemari'                 => trim($row[15] ?? ''),
+                'boks'                   => trim($row[16] ?? ''),
+                'jenis_arsip'            => trim($row[17] ?? ''),
+                'alih_media'             => trim($row[18] ?? ''),
+
+            ]);
         }
 
-        return new Arsip([
-            'nomor_arsip'            => trim($row[0] ?? ''),
-            'kode_pelaksana'         => trim($row[1] ?? ''),
-            'kode_klasifikasi'       => trim($row[2] ?? ''),
-            'kode_satker'            => trim($row[3] ?? ''),
-            'nama_unit_pengolah'     => trim($row[4] ?? ''),
-            'uraian_informasi_arsip' => trim($row[5] ?? ''),
-            'tahun_awal'             => !empty($row[6]) ? trim($row[6]) : null,
-            'tahun_akhir'            => !empty($row[7]) ? trim($row[7]) : null,
-            'tingkat_perkembangan'   => trim($row[8] ?? ''),
-            'media_simpan'           => trim($row[9] ?? ''),
-            'jumlah_berkas'          => trim($row[10] ?? ''),
-            'kondisi_fisik'          => trim($row[11] ?? ''),
-            'ukuran'                 => trim($row[12] ?? ''),
-            'keterangan'             => trim($row[13] ?? ''),
-            'ruang'                  => trim($row[14] ?? ''),
-            'lemari'                 => trim($row[15] ?? ''),
-            'boks'                   => trim($row[16] ?? ''),
-            'jenis_arsip'            => trim($row[17] ?? ''),
-            'alih_media'             => trim($row[18] ?? ''),
-
-        ]);
+        return null;
     }
 
     /**
