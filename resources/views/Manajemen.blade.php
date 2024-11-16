@@ -83,28 +83,15 @@
         }
     </style>
 
-    <<<<<<< HEAD <!-- ini untuk halaman -->
-        <script>
-            $(document).ready(function() {
-                        $('table').DataTable({
-                            "pageLength": 25, // Mengatur jumlah baris per halaman
-                            "lengthChange": false // Menonaktifkan opsi perubahan jumlah baris per halaman
-                        }); ===
-                        ===
-                        = <
-                        !--ini untuk halaman-- >
-                        <
-                        script >
-                            $(document).ready(function() {
-                                    $('table').DataTable({
-                                        "pageLength": 25, // jumlah baris per halaman
-                                        "lengthChange": false // Menonaktifkan opsi perubahan jumlah baris per halaman
-                                            >>>
-                                            >>>
-                                            >
-                                            5489 dcfd69cb737290718d8700c9c44d1760d880
-                                    });
-        </script>
+
+    <script>
+        $(document).ready(function() {
+            $('table').DataTable({
+                "pageLength": 25, // jumlah baris per halaman
+                "lengthChange": false // Menonaktifkan opsi perubahan jumlah baris per halaman
+            });
+        });
+    </script>
 
 
 </head>
