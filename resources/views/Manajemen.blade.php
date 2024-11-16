@@ -119,19 +119,7 @@
                                 <input type="file" name="file" class="form-control" required>
                             </div>
 
-                            @if (session('error'))
-                                <div class="alert alert-danger">
-                                    {!! session('error') !!}
-                                </div>
-                            @endif
-
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-
-                            <button type="submit" class="btn btn-primary">Import</button>
+                            <button type="submit" class="btn btn-primary">Upload</button>
                             <a href="{{ route('arsip.template') }}" class="btn btn-secondary">Download Template</a>
                         </form>
                     </div>
@@ -150,6 +138,18 @@
         {{-- tombol create --}}
         <a href="{{ route('create-Manajemen') }}"><button type="button"
                 class="btn btn-primary tombol2">Create</button></a>
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {!! session('error') !!}
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
     </div>
 
     <!-- Kotak putih blakang tabel -->

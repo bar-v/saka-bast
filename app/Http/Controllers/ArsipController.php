@@ -26,7 +26,7 @@ class ArsipController extends Controller
 
             $file = $request->file('file');
 
-            // Import data
+            // Import data dengan validasi untuk mencegah duplikasi
             Excel::import(new ArsipImport, $file);
 
             return back()->with('success', 'Data berhasil diimport!');
@@ -43,6 +43,7 @@ class ArsipController extends Controller
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
 
     // Menampilkan Data dengan Array
     public function preview(Request $request)
