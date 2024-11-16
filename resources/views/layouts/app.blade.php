@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'SAKA BAST') }}</title>
+        <link rel="icon" type="image/svg+xml" href="{{ asset('image/image.svg') }}">           
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -29,7 +30,7 @@
             @endisset
 
             <!-- Page Content -->
-            <main class="bg-white">
+            <main class="bg-gray-900">
                 {{ $slot }}
             </main>
         </div>

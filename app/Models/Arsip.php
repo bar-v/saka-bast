@@ -47,3 +47,4 @@ class Arsip extends Model
         return $value ?? '-';
     }
 }
+

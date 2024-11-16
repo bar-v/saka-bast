@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
-    <!-- Tambahkan link ke Bootstrap CSS -->
+
+    <!--link ke Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Tambahkan jQuery dan Bootstrap JS -->
+    <!--jQuery dan Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
@@ -12,18 +13,21 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
+    <!--Icon Links-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
 
     <style>
         /* Gaya tambahan untuk header */
         .header-bg {
             background-color: #2C2F33;
-            /* Warna gelap atau warna lain yang sesuai */
+            /* Warna gelap */
             padding: 20px;
             color: white;
             text-align: center;
         }
 
-        /* Gaya untuk tombol dan tampilan lainnya tetap sama */
+        /* Gaya untuk tombol dan tampilan */
         .ibu {
             padding-top: 2%;
             display: flex;
@@ -41,7 +45,7 @@
         }
 
         .pencari label {
-            color: black;
+            color: white;
         }
 
         .background-box {
@@ -79,22 +83,35 @@
         }
     </style>
 
-    <!-- ini untuk halaman -->
-    <script>
-        $(document).ready(function() {
-            $('table').DataTable({
-                "pageLength": 25, // Mengatur jumlah baris per halaman
-                "lengthChange": false // Menonaktifkan opsi perubahan jumlah baris per halaman
-            });
-        });
-    </script>
+    <<<<<<< HEAD <!-- ini untuk halaman -->
+        <script>
+            $(document).ready(function() {
+                        $('table').DataTable({
+                            "pageLength": 25, // Mengatur jumlah baris per halaman
+                            "lengthChange": false // Menonaktifkan opsi perubahan jumlah baris per halaman
+                        }); ===
+                        ===
+                        = <
+                        !--ini untuk halaman-- >
+                        <
+                        script >
+                            $(document).ready(function() {
+                                    $('table').DataTable({
+                                        "pageLength": 25, // jumlah baris per halaman
+                                        "lengthChange": false // Menonaktifkan opsi perubahan jumlah baris per halaman
+                                            >>>
+                                            >>>
+                                            >
+                                            5489 dcfd69cb737290718d8700c9c44d1760d880
+                                    });
+        </script>
 
 
 </head>
 
 <x-app-layout>
 
-    <!-- Baris tombol dan pencarian -->
+    <!-- tombol dan pencarian -->
     <div class="ibu">
         <!-- Modal -->
         <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
@@ -140,43 +157,77 @@
             </div>
         </div>
 
-        <!-- Tombol Import dengan pemanggilan modal -->
+        <!-- Tombol Import modal -->
         <button type="button" class="btn btn-success tombol1" data-toggle="modal"
             data-target="#importModal">Import</button>
-
-        <!-- Tombol Edit -->
-        <button type="button" class="btn btn-primary tombol2">Edit</button>
-
-        <!-- Pencarian berada di ujung kanan dengan teks label putih -->
-        <div class="pencari">
-            <label for="search" class="mr-2">Search:</label>
-            <input type="text" id="search" placeholder="Masukkan yang dicari...">
-        </div>
+        {{-- tombol create --}}
+        <a href="{{ route('create-Manajemen') }}"><button type="button"
+                class="btn btn-primary tombol2">Create</button></a>
     </div>
 
-    <!-- Kotak putih sebagai latar belakang tabel -->
+    <!-- Kotak putih blakang tabel -->
     <div class="flex justify-center items-center min-h-screen">
         <div class="background-box shadow-lg">
-            @if (isset($headers) && isset($data))
-                <table class="table">   
-                    <thead>
+            <table id="myTable">
+                <thead>
+                    <tr>
+                        <th>NO ARSIP</th>
+                        <th>KODE PELAKSANA</th>
+                        <th>KODE KLASIFIKASI</th>
+                        <th>KODE SATKER</th>
+                        <th>NAMA UNIT PENGOLAH</th>
+                        <th>URAIAN INFORMASI ARSIP</th>
+                        <th>TAHUN AWAL</th>
+                        <th>TAHUN AKHIR</th>
+                        <th>TINGKAT PERKEMBANGAN ARSIP</th>
+                        <th>MEDIA SIMPAN</th>
+                        <th>JUMLAH BERKAS</th>
+                        <th>KONDISI FISIK</th>
+                        <th>UKURAN</th>
+                        <th>KETERANGAN</th>
+                        <th>RUANG</th>
+                        <th>LEMARI</th>
+                        <th>BOKS</th>
+                        <th>JENIS ARSIP</th>
+                        <th>ALIH MEDIA</th>
+                        <th>EDIT/HAPUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($arsip as $item)
                         <tr>
-                            @foreach ($headers as $header)
-                                <th>{{ $header }}</th>
-                            @endforeach
+                            <td>{{ $item->nomor_arsip }}</td>
+                            <td>{{ $item->kode_pelaksana }}</td>
+                            <td>{{ $item->kode_klasifikasi }}</td>
+                            <td>{{ $item->kode_satker }}</td>
+                            <td>{{ $item->nama_unit_pengolah }}</td>
+                            <td>{{ $item->uraian_informasi_arsip }}</td>
+                            <td>{{ $item->tahun_awal }}</td>
+                            <td>{{ $item->tahun_akhir }}</td>
+                            <td>{{ $item->tingkat_perkembangan }}</td>
+                            <td>{{ $item->media_simpan }}</td>
+                            <td>{{ $item->jumlah_berkas }}</td>
+                            <td>{{ $item->kondisi_fisik }}</td>
+                            <td>{{ $item->ukuran }}</td>
+                            <td>{{ $item->keterangan }}</td>
+                            <td>{{ $item->ruang }}</td>
+                            <td>{{ $item->lemari }}</td>
+                            <td>{{ $item->boks }}</td>
+                            <td>{{ $item->jenis_arsip }}</td>
+                            <td>{{ $item->alih_media }}</td>
+                            <td>
+                                <a href="{{ route('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
+                                    title="Edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>|
+                                <a href="" class="btn-action btn-delete" title="Hapus">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $row)
-                            <tr>
-                                @foreach ($row as $cell)
-                                    <td>{{ $cell }}</td>
-                                @endforeach
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @endif
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 
