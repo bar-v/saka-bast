@@ -74,3 +74,8 @@ Route::get('Manajemen/import', function () {
 //Create Section
 Route::get('/create-Manajemen', [ArsipController::class, 'create'])->name('create-Manajemen');
 Route::post('/simpan-Manajemen', [ArsipController::class, 'store'])->name('simpan-Manajemen');
+
+//Edit Section
+Route::get('/edit-Manajemen/{id}', [ArsipController::class, 'edit'])->name('edit-Manajemen');
+Route::put('/update-Manajemen/{id}', [ArsipController::class, 'update'])->name('update-Manajemen');
+Route::delete('/delete-Manajemen/{id}', [ArsipController::class, 'destroy'])->name('delete-Manajemen');

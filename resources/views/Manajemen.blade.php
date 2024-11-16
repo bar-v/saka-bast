@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
+    <!--Icon Links-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
 
     <style>
         /* Gaya tambahan untuk header */
@@ -157,6 +160,7 @@
                         <th>BOKS</th>
                         <th>JENIS ARSIP</th>
                         <th>ALIH MEDIA</th>
+                        <th>EDIT/HAPUS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -181,6 +185,14 @@
                             <td>{{ $item->boks }}</td>
                             <td>{{ $item->jenis_arsip }}</td>
                             <td>{{ $item->alih_media }}</td>
+                            <td>
+                                <a href="{{ route('edit-Manajemen', $item->id) }}" class="btn-action btn-edit" title="Edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>|
+                                <a href="" class="btn-action btn-delete" title="Hapus">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
