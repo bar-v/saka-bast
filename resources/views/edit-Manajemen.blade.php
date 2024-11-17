@@ -137,7 +137,7 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Nama Unit Pengolah</label>
-                        <textarea class="form-control" id="nama_unit_pengolah" name="nama_unit_pengolah" rows="2" value="{{ $arsip->nama_unit_pengolah }}" placeholder="Masukkan nama unit pengolah"></textarea>
+                        <input class="form-control" id="nama_unit_pengolah" name="nama_unit_pengolah" rows="2" value="{{ $arsip->nama_unit_pengolah }}" placeholder="Masukkan nama unit pengolah">
                     </div>
                 </div>
             </div>
@@ -148,12 +148,11 @@
                 <div class="row g-3">
                     <div class="col-12">
                         <label class="form-label">Uraian Informasi Arsip</label>
-                        <textarea class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip" value="{{ $arsip->uraian_informasi_arsip }}" rows="3" placeholder="Masukkan uraian informasi arsip"></textarea>
+                        <input class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip" value="{{ $arsip->uraian_informasi_arsip }}" rows="3" placeholder="Masukkan uraian informasi arsip">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Tingkat Perkembangan</label>
                         <select class="form-control" id= "tingkat_perkembangan" name="tingkat_perkembangan" value="{{ $arsip->tingkat_perkembangan }}"> 
-                            <option value="">Pilih tingkat perkembangan</option>
                             <option value="asli">Asli</option>
                             <option value="tembusan">Tembusan</option>
                             <option value="salinan">Salinan</option>
@@ -163,7 +162,6 @@
                     <div class="col-md-4">
                         <label class="form-label">Jenis Arsip</label>
                         <select class="form-control" id= "jenis_arsip" name="jenis_arsip" value="{{ $arsip->jenis_arsip }}">
-                            <option value="">Pilih jenis arsip</option>
                             <option value="tekstual">Tekstual</option>
                             <option value="audio_visual">Audio Visual</option>
                             <option value="kartografi">Kartografi</option>
@@ -196,7 +194,6 @@
                     <div class="col-md-4">
                         <label class="form-label">Kondisi Fisik</label>
                         <select class="form-control" id= "kondisi_fisik" name="kondisi_fisik" value="{{ $arsip->kondisi_fisik }}">
-                            <option value="">Pilih kondisi</option>
                             <option value="baik">Baik</option>
                             <option value="rusak_ringan">Rusak Ringan</option>
                             <option value="rusak_berat">Rusak Berat</option>
@@ -205,7 +202,6 @@
                     <div class="col-md-4">
                         <label class="form-label">Ukuran Kertas</label>
                         <select class="form-control" id= "ukuran" name="ukuran" value="{{ $arsip->ukuran }}">
-                            <option value="">Pilih ukuran kertas</option>
                             <option value="A4">A4</option>
                             <option value="A3">A3</option>
                             <option value="F4">F4</option>
@@ -223,7 +219,7 @@
                 <div class="row g-3">
                     <div class="col-12">
                         <label class="form-label">Keterangan</label>
-                        <textarea class="form-control" id= "keterangan" name="keterangan" rows="3" value="{{ $arsip->keterangan }}" placeholder="Masukkan keterangan tambahan"></textarea>
+                        <input class="form-control" id= "keterangan" name="keterangan" rows="3" value="{{ $arsip->keterangan }}" placeholder="Masukkan keterangan tambahan">
                     </div>
                 </div>
             </div>
@@ -247,7 +243,6 @@
                     <div class="col-md-3">
                         <label class="form-label">Alih Media</label>
                         <select class="form-control" id= "alih_media" name="alih_media" value="{{ $arsip->alih_media }}">
-                            <option value="">Pilih status</option>
                             <option value="sudah">Sudah</option>
                             <option value="belum">Belum</option>
                         </select>
