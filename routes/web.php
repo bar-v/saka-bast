@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\ProfileController;
+use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeUnit\FunctionUnit;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,6 +13,10 @@ Route::get('/', function () {
 
 Route::get('/beranda', function () {
     return view('beranda');
+});
+
+Route::get('/datainsert', function () {
+    return view('datainsert');
 });
 
 Route::get('/login', function () {
@@ -57,10 +63,27 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 //Laravel Excel Import Route
-Route::get('arsip/import', [App\Http\Controllers\ArsipController::class, 'index']);
-Route::post('arsip/import', [App\Http\Controllers\ArsipController::class, 'importExcelData']);
+Route::get('/Manajemen', [App\Http\Controllers\ArsipController::class, 'index'])->name('Manajemen');
+Route::post('/importarsip', [App\Http\Controllers\ArsipController::class, 'importArsipExcel'])->name('importarsip');
 // Route::post('Manajemen', [ArsipController::class, 'import'])->name('Manajemen.import');
 
 Route::get('Manajemen/import', function () {
     return (view('Manajemen/import'));
 });
+
+//Create Section
+Route::get('/create-Manajemen', [ArsipController::class, 'create'])->name('create-Manajemen');
+Route::post('/simpan-Manajemen', [ArsipController::class, 'store'])->name('simpan-Manajemen');
+
+//Edit Section
+Route::get('/edit-Manajemen/{id}', [ArsipController::class, 'edit'])->name('edit-Manajemen');
+Route::put('/update-Manajemen/{id}', [ArsipController::class, 'update'])->name('update-Manajemen');
+
+
+//Delete Section
+Route::delete('delete-Manajemen/{id}', [ArsipController::class, 'destroy'])->name('delete-Manajemen');
+Route::delete('/delete-Manajemen/{id}', [ArsipController::class, 'destroy'])->name('delete-Manajemen')->middleware('auth');
+
+Route::get('admin', function () {
+    return '<h1>Boo</h1>';
+})->middleware(['auth', 'verified', 'role: admin']);

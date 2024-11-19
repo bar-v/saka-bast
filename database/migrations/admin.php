@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('arsip', function (Blueprint $table) {
-            $table->id();
-            $table->string('nomor_arsip'); // Nomor Arsip
-            $table->string('kode_pelaksana'); // Kode Pelaksana
-            // $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            //
         });
     }
 
@@ -24,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('arsip');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
+
 };
