@@ -219,7 +219,6 @@
                     <div class="col-md-4">
                         <label class="form-label">Ukuran Kertas</label>
                         <select class="form-control" id= "ukuran" name="ukuran" value="{{ $arsip->ukuran }}">
-                            <option value="">Pilih ukuran kertas</option>
                             <option value="A4">A4</option>
                             <option value="A3">A3</option>
                             <option value="F4">F4</option>
