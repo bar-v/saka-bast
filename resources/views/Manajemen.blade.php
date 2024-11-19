@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    
+
     <!--link ke Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!--jQuery dan Bootstrap JS -->
@@ -83,15 +83,15 @@
         }
     </style>
 
-        <!-- ini untuk halaman -->
-        <script>
-    $(document).ready(function() {
-        $('table').DataTable({
-            "pageLength": 25,  // jumlah baris per halaman
-            "lengthChange": false  // Menonaktifkan opsi perubahan jumlah baris per halaman
+    <!-- ini untuk halaman -->
+    <script>
+        $(document).ready(function() {
+            $('table').DataTable({
+                "pageLength": 25, // jumlah baris per halaman
+                "lengthChange": false // Menonaktifkan opsi perubahan jumlah baris per halaman
+            });
         });
-    });
-</script>
+    </script>
 
 
 </head>
@@ -106,7 +106,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="importModalLabel">File Upload</h5>
+                        <h5 class="modal-title" id="importModalLabel">Upload File Excel</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -128,17 +128,21 @@
             </div>
         </div>
 
-        <!-- Tombol Import modal -->
-        <button type="button" class="btn btn-success tombol1" data-toggle="modal"
-            data-target="#importModal">Import</button>
-        {{-- tombol create --}}
-        <a href="{{ route('create-Manajemen') }}"><button type="button" class="btn btn-primary tombol2">Create</button></a>
+
+        @if (auth()->user()->hasRole('admin'))
+            <!-- Tombol Import modal -->
+            <button type="button" class="btn btn-success tombol1" data-toggle="modal"
+                data-target="#importModal">Import</button>
+            {{-- tombol create --}}
+            <a href="{{ route('create-Manajemen') }}"><button type="button"
+                    class="btn btn-primary tombol2">Create</button></a>
+        @endif
     </div>
 
     <!-- Kotak putih blakang tabel -->
     <div class="flex justify-center items-center min-h-screen">
         <div class="background-box shadow-lg">
-        <table id="myTable">
+            <table id="myTable">
                 <thead>
                     <tr>
                         <th>NO ARSIP</th>
@@ -160,7 +164,9 @@
                         <th>BOKS</th>
                         <th>JENIS ARSIP</th>
                         <th>ALIH MEDIA</th>
-                        <th>EDIT/HAPUS</th>
+                        @if (auth()->user()->hasRole('admin'))
+                            <th>EDIT/HAPUS</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -185,20 +191,25 @@
                             <td>{{ $item->boks }}</td>
                             <td>{{ $item->jenis_arsip }}</td>
                             <td>{{ $item->alih_media }}</td>
-                            <td>
-                                <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit" title="Edit">
-                                    <i class="bi bi-pencil-square" style="background: none; border: none; padding: 0; color: rgb(34, 0, 255);"></i>
-                                </a>|
-                                <form action="{{ route('delete-Manajemen', $item->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn-action btn-delete" title="Hapus" 
-                                            onclick="return confirm('Are you sure you want to delete this item?')" 
+                            @if (auth()->user()->hasRole('admin'))
+                                <td>
+                                    <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
+                                        title="Edit">
+                                        <i class="bi bi-pencil-square"
+                                            style="background: none; border: none; padding: 0; color: rgb(34, 0, 255);"></i>
+                                    </a>|
+                                    <form action="{{ route('delete-Manajemen', $item->id) }}" method="POST"
+                                        style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-action btn-delete" title="Hapus"
+                                            onclick="return confirm('Are you sure you want to delete this item?')"
                                             style="background: none; border: none; padding: 0; color: red;">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>

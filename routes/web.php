@@ -83,3 +83,7 @@ Route::put('/update-Manajemen/{id}', [ArsipController::class, 'update'])->name('
 //Delete Section
 Route::delete('delete-Manajemen/{id}', [ArsipController::class, 'destroy'])->name('delete-Manajemen');
 Route::delete('/delete-Manajemen/{id}', [ArsipController::class, 'destroy'])->name('delete-Manajemen')->middleware('auth');
+
+Route::get('admin', function () {
+    return '<h1>Boo</h1>';
+})->middleware(['auth', 'verified', 'role: admin']);
