@@ -136,6 +136,11 @@
             {{-- tombol create --}}
             <a href="{{ route('create-Manajemen') }}"><button type="button"
                     class="btn btn-primary tombol2">Create</button></a>
+
+                    <a href="{{ route('export-Manajemen') }}">
+                     <button type="button" class="btn btn-danger tombol3">Export</button>
+                    </a>
+
         @endif
     </div>
 

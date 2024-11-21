@@ -71,6 +71,13 @@ Route::get('Manajemen/import', function () {
     return (view('Manajemen/import'));
 });
 
+// laravel export
+use App\Http\Controllers\ManajemenController;
+
+Route::get('/export-manajemen', [ManajemenController::class, 'export'])->name('export-Manajemen');
+
+
+
 //Create Section
 Route::get('/create-Manajemen', [ArsipController::class, 'create'])->name('create-Manajemen');
 Route::post('/simpan-Manajemen', [ArsipController::class, 'store'])->name('simpan-Manajemen');
