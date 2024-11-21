@@ -129,14 +129,18 @@
         </div>
 
 
-        {{-- @if (auth()->user()->hasRole('admin')) --}}
-        <!-- Tombol Import modal -->
-        <button type="button" class="btn btn-success tombol1" data-toggle="modal"
-            data-target="#importModal">Import</button>
-        {{-- tombol create --}}
-        <a href="{{ route('create-Manajemen') }}"><button type="button"
-                class="btn btn-primary tombol2">Create</button></a>
-        {{-- @endif --}}
+        @if (auth()->user()->hasRole('admin'))
+            <!-- Tombol Import modal -->
+            <button type="button" class="btn btn-success tombol1" data-toggle="modal"
+                data-target="#importModal">Import</button>
+            {{-- tombol create --}}
+            <a href="{{ route('create-Manajemen') }}"><button type="button"
+                    class="btn btn-primary tombol2">Create</button></a>
+
+            <a href="{{ route('export-Manajemen') }}">
+                <button type="button" class="btn btn-danger tombol3">Export</button>
+            </a>
+        @endif
     </div>
 
     <!-- Kotak putih blakang tabel -->
