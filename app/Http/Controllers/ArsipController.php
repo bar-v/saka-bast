@@ -10,10 +10,17 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ArsipController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $arsip = Arsip::all();
-        return view('Manajemen', compact('arsip'));
+        // Ambil jumlah baris per halaman dari request atau gunakan nilai default
+        $perPage = $request->get('per_page', 25); // Default 25
+
+        // Validasi jumlah baris agar tidak terlalu besar atau kecil
+        $perPage = is_numeric($perPage) && $perPage > 0 && $perPage <= 100 ? $perPage : 25;
+
+        // Query data dengan pagination
+        $arsip = Arsip::paginate($perPage);
+        return view('Manajemen', compact('arsip', 'perPage'));
     }
 
     public function importArsipExcel(Request $request)
@@ -40,7 +47,7 @@ class ArsipController extends Controller
             'nama_unit_pengolah' => $request->nama_unit_pengolah,
             'uraian_informasi_arsip' => $request->uraian_informasi_arsip,
             'tahun_awal' => $request->tahun_awal,
-            'tahun_akhir' => $request->tahun_akhir, 
+            'tahun_akhir' => $request->tahun_akhir,
             'tingkat_perkembangan' => $request->tingkat_perkembangan,
             'media_simpan' => $request->media_simpan,
             'jumlah_berkas' => $request->jumlah_berkas,
@@ -75,7 +82,7 @@ class ArsipController extends Controller
     {
         $arsip = Arsip::findOrFail($id);
         $arsip->delete();
-        
+
         return redirect('Manajemen')->with('success', 'Data berhasil dihapus');
     }
 }
