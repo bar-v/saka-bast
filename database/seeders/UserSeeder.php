@@ -20,12 +20,12 @@
             ]);
             $admin->assignRole('admin');
 
-            // $admin = User::create([
-            //     'name' => 'Admin 2',
-            //     'email' => 'admin2@gmail.com',
-            //     'password' => bcrypt('rahasia')
-            // ]);
-            // $admin->assignRole('admin');
+            $admin = User::create([
+                'name' => 'Admin 2',
+                'email' => 'admin2@gmail.com',
+                'password' => bcrypt('rahasia')
+            ]);
+            $admin->assignRole('admin');
 
             $admin = User::create([
                 'name' => 'User 1',
