@@ -138,92 +138,91 @@
             @endif
         </div>
 
-        <!-- Kotak putih blakang tabel -->
-        <div class="flex justify-center items-center min-h-screen">
-            <div class="background-box shadow-lg">
-                <table id="myTable">
-                    <form method="GET" action="{{ route('Manajemen') }}">
-                        <label for="per_page">Jumlah baris per halaman:</label>
-                        <select name="per_page" id="per_page" onchange="this.form.submit()">
-                            <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
-                            <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
-                            <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
-                            <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
-                        </select>
-                    </form>
-                    <thead>
+    <!-- Kotak putih blakang tabel -->
+    <div class="flex justify-center items-center min-h-screen">
+        <div class="background-box shadow-lg">
+            <table id="myTable">
+                <form method="GET" action="{{ route('Manajemen') }}">
+                    <label for="per_page">Jumlah baris per halaman:</label>
+                    <select name="per_page" id="per_page" onchange="this.form.submit()">
+                        <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
+                        <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
+                        <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                    </select>
+                </form>
+                <thead>
+                    <tr>
+                        <th>NO ARSIP</th>
+                        <th>KODE PELAKSANA</th>
+                        <th>KODE KLASIFIKASI</th>
+                        <th>KODE SATKER</th>
+                        <th>NAMA UNIT PENGOLAH</th>
+                        <th>URAIAN INFORMASI ARSIP</th>
+                        <th>TAHUN AWAL</th>
+                        <th>TAHUN AKHIR</th>
+                        <th>TINGKAT PERKEMBANGAN ARSIP</th>
+                        <th>MEDIA SIMPAN</th>
+                        <th>JUMLAH BERKAS</th>
+                        <th>KONDISI FISIK</th>
+                        <th>UKURAN</th>
+                        <th>KETERANGAN</th>
+                        <th>RUANG</th>
+                        <th>LEMARI</th>
+                        <th>BOKS</th>
+                        <th>JENIS ARSIP</th>
+                        <th>ALIH MEDIA</th>
+                        {{-- @if (auth()->user()->hasRole('admin')) --}}
+                        <th>EDIT/HAPUS</th>
+                        {{-- @endif --}}
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($arsip as $item)
                         <tr>
-                            <th>NO ARSIP</th>
-                            <th>KODE PELAKSANA</th>
-                            <th>KODE KLASIFIKASI</th>
-                            <th>KODE SATKER</th>
-                            <th>NAMA UNIT PENGOLAH</th>
-                            <th>URAIAN INFORMASI ARSIP</th>
-                            <th>TAHUN AWAL</th>
-                            <th>TAHUN AKHIR</th>
-                            <th>TINGKAT PERKEMBANGAN ARSIP</th>
-                            <th>MEDIA SIMPAN</th>
-                            <th>JUMLAH BERKAS</th>
-                            <th>KONDISI FISIK</th>
-                            <th>UKURAN</th>
-                            <th>KETERANGAN</th>
-                            <th>RUANG</th>
-                            <th>LEMARI</th>
-                            <th>BOKS</th>
-                            <th>JENIS ARSIP</th>
-                            <th>ALIH MEDIA</th>
+                            <td>{{ $item->nomor_arsip }}</td>
+                            <td>{{ $item->kode_pelaksana }}</td>
+                            <td>{{ $item->kode_klasifikasi }}</td>
+                            <td>{{ $item->kode_satker }}</td>
+                            <td>{{ $item->nama_unit_pengolah }}</td>
+                            <td>{{ $item->uraian_informasi_arsip }}</td>
+                            <td>{{ $item->tahun_awal }}</td>
+                            <td>{{ $item->tahun_akhir }}</td>
+                            <td>{{ $item->tingkat_perkembangan }}</td>
+                            <td>{{ $item->media_simpan }}</td>
+                            <td>{{ $item->jumlah_berkas }}</td>
+                            <td>{{ $item->kondisi_fisik }}</td>
+                            <td>{{ $item->ukuran }}</td>
+                            <td>{{ $item->keterangan }}</td>
+                            <td>{{ $item->ruang }}</td>
+                            <td>{{ $item->lemari }}</td>
+                            <td>{{ $item->boks }}</td>
+                            <td>{{ $item->jenis_arsip }}</td>
+                            <td>{{ $item->alih_media }}</td>
                             {{-- @if (auth()->user()->hasRole('admin')) --}}
-                            <th>EDIT/HAPUS</th>
+                            <td>
+                                <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
+                                    title="Edit">
+                                    <i class="bi bi-pencil-square"
+                                        style="background: none; border: none; padding: 0; color: rgb(34, 0, 255);"></i>
+                                </a>|
+                                <form action="{{ route('delete-Manajemen', $item->id) }}" method="POST"
+                                    style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-action btn-delete" title="Hapus"
+                                        onclick="return confirm('Are you sure you want to delete this item?')"
+                                        style="background: none; border: none; padding: 0; color: red;">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
                             {{-- @endif --}}
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($arsip as $item)
-                            <tr>
-                                <td>{{ $item->nomor_arsip }}</td>
-                                <td>{{ $item->kode_pelaksana }}</td>
-                                <td>{{ $item->kode_klasifikasi }}</td>
-                                <td>{{ $item->kode_satker }}</td>
-                                <td>{{ $item->nama_unit_pengolah }}</td>
-                                <td>{{ $item->uraian_informasi_arsip }}</td>
-                                <td>{{ $item->tahun_awal }}</td>
-                                <td>{{ $item->tahun_akhir }}</td>
-                                <td>{{ $item->tingkat_perkembangan }}</td>
-                                <td>{{ $item->media_simpan }}</td>
-                                <td>{{ $item->jumlah_berkas }}</td>
-                                <td>{{ $item->kondisi_fisik }}</td>
-                                <td>{{ $item->ukuran }}</td>
-                                <td>{{ $item->keterangan }}</td>
-                                <td>{{ $item->ruang }}</td>
-                                <td>{{ $item->lemari }}</td>
-                                <td>{{ $item->boks }}</td>
-                                <td>{{ $item->jenis_arsip }}</td>
-                                <td>{{ $item->alih_media }}</td>
-                                {{-- @if (auth()->user()->hasRole('admin')) --}}
-                                <td>
-                                    <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
-                                        title="Edit">
-                                        <i class="bi bi-pencil-square"
-                                            style="background: none; border: none; padding: 0; color: rgb(34, 0, 255);"></i>
-                                    </a>|
-                                    <form action="{{ route('delete-Manajemen', $item->id) }}" method="POST"
-                                        style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn-action btn-delete"
-                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                            <i class="bi bi-trash3"
-                                                style="background: none; border: none; padding: 0; color: red;"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                                {{-- @endif --}}
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {{ $arsip->links() }}
-            </div>
+                    @endforeach
+                </tbody>
+            </table>
+            {{ $arsip->appends(['per_page' => request('per_page')])->links() }}
         </div>
     </x-app-layout>
 </body>
