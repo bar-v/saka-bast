@@ -156,6 +156,7 @@
                         <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
                     </select>
                 </form>
+                {{ $arsip->appends(['per_page' => request('per_page')])->links() }}
                 <thead>
                     <tr>
                         <th>NO ARSIP</th>
@@ -227,7 +228,6 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $arsip->appends(['per_page' => request('per_page')])->links() }}
         </div>
     </div>
 
