@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <!--link ke Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!--jQuery dan Bootstrap JS -->
@@ -15,7 +14,6 @@
 
     <!--Icon Links-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-
 
     <style>
         /* Gaya tambahan untuk header */
@@ -84,64 +82,61 @@
     </style>
 
     <!-- ini untuk halaman -->
-    {{-- <script>
+    <script>
         $(document).ready(function() {
             $('table').DataTable({
-                // "pageLength": 25, // jumlah baris per halaman
-                "lengthChange": false // Menonaktifkan opsi perubahan jumlah baris per halaman
+                "lengthChange": false, // Menonaktifkan opsi perubahan jumlah baris per halaman
+                "paging": false, // Hilangkan pagination
+                "info": false // Hilangkan informasi jumlah data
             });
         });
-    </script> --}}
-
-
+    </script>
 </head>
 
-<x-app-layout>
+<body>
+    <x-app-layout>
+        <!-- tombol dan pencarian -->
+        <div class="ibu">
+            <!-- Modal -->
+            <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="importModalLabel">Upload File Excel</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('importarsip') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
 
-    <!-- tombol dan pencarian -->
-    <div class="ibu">
-        <!-- Modal -->
-        <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="importModalLabel">Upload File Excel</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('importarsip') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-
-                            <div class="form-group">
-                                <input type="file" name="file" required="required">
-                            </div>
-                            <button type="submit">Import</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <div class="form-group">
+                                    <input type="file" name="file" required="required">
+                                </div>
+                                <button type="submit">Import</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            @if (auth()->user()->hasRole('admin'))
+                <!-- Tombol Import modal -->
+                <button type="button" class="btn btn-success tombol1" data-toggle="modal"
+                    data-target="#importModal">Import</button>
+                {{-- tombol create --}}
+                <a href="{{ route('create-Manajemen') }}"><button type="button"
+                        class="btn btn-primary tombol2">Create</button></a>
+
+                <a href="{{ route('export-Manajemen') }}">
+                    <button type="button" class="btn btn-danger tombol3">Export</button>
+                </a>
+            @endif
         </div>
-
-
-        @if (auth()->user()->hasRole('admin'))
-            <!-- Tombol Import modal -->
-            <button type="button" class="btn btn-success tombol1" data-toggle="modal"
-                data-target="#importModal">Import</button>
-            {{-- tombol create --}}
-            <a href="{{ route('create-Manajemen') }}"><button type="button"
-                    class="btn btn-primary tombol2">Create</button></a>
-
-            <a href="{{ route('export-Manajemen') }}">
-                <button type="button" class="btn btn-danger tombol3">Export</button>
-            </a>
-        @endif
-    </div>
 
     <!-- Kotak putih blakang tabel -->
     <div class="flex justify-center items-center min-h-screen">
@@ -178,9 +173,9 @@
                         <th>BOKS</th>
                         <th>JENIS ARSIP</th>
                         <th>ALIH MEDIA</th>
-                        @if (auth()->user()->hasRole('admin'))
-                            <th>EDIT/HAPUS</th>
-                        @endif
+                        {{-- @if (auth()->user()->hasRole('admin')) --}}
+                        <th>EDIT/HAPUS</th>
+                        {{-- @endif --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -205,30 +200,31 @@
                             <td>{{ $item->boks }}</td>
                             <td>{{ $item->jenis_arsip }}</td>
                             <td>{{ $item->alih_media }}</td>
-                            @if (auth()->user()->hasRole('admin'))
-                                <td>
-                                    <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
-                                        title="Edit">
-                                        <i class="bi bi-pencil-square"
-                                            style="background: none; border: none; padding: 0; color: rgb(34, 0, 255);"></i>
-                                    </a>|
-                                    <form action="{{ route('delete-Manajemen', $item->id) }}" method="POST"
-                                        style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn-action btn-delete" title="Hapus"
-                                            onclick="return confirm('Are you sure you want to delete this item?')"
-                                            style="background: none; border: none; padding: 0; color: red;">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            @endif
+                            {{-- @if (auth()->user()->hasRole('admin')) --}}
+                            <td>
+                                <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
+                                    title="Edit">
+                                    <i class="bi bi-pencil-square"
+                                        style="background: none; border: none; padding: 0; color: rgb(34, 0, 255);"></i>
+                                </a>|
+                                <form action="{{ route('delete-Manajemen', $item->id) }}" method="POST"
+                                    style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-action btn-delete" title="Hapus"
+                                        onclick="return confirm('Are you sure you want to delete this item?')"
+                                        style="background: none; border: none; padding: 0; color: red;">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                            {{-- @endif --}}
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-    </div>
+    </x-app-layout>
+</body>
 
-</x-app-layout>
+</html>

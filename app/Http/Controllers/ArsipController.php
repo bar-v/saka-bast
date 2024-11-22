@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use create;
 use App\Models\Arsip;
 use App\Imports\ArsipImport;
 use Illuminate\Http\Request;
@@ -10,6 +9,26 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ArsipController extends Controller
 {
+    public function getData(Request $request)
+    {
+        $query = Arsip::query();
+
+        // Filter pencarian
+        if ($request->has('search') && $request->search['value']) {
+            $search = $request->search['value'];
+            $query->where('nomor_arsip', 'like', "%$search%")
+                ->orWhere('nama_unit_pengolah', 'like', "%$search%")
+                ->orWhere('uraian_informasi_arsip', 'like', "%$search%");
+        }
+
+        // Kembalikan data dalam format DataTables
+        return datatables($query)
+            ->addColumn('aksi', function ($item) {
+                return view('partials.aksi', compact('item'))->render();
+            })
+            ->make(true);
+    }
+
     public function index(Request $request)
     {
         // Ambil jumlah baris per halaman dari request atau gunakan nilai default
@@ -18,9 +37,18 @@ class ArsipController extends Controller
         // Validasi jumlah baris agar tidak terlalu besar atau kecil
         $perPage = is_numeric($perPage) && $perPage > 0 && $perPage <= 100 ? $perPage : 25;
 
-        // Query data dengan pagination
-        $arsip = Arsip::paginate($perPage);
-        return view('Manajemen', compact('arsip', 'perPage'));
+        // Ambil parameter pencarian dari request
+        $search = $request->get('search');
+
+        // Query data dengan filter pencarian dan pagination
+        $arsip = Arsip::when($search, function ($query, $search) {
+            $query->where('nomor_arsip', 'like', "%$search%")
+                ->orWhere('nama_unit_pengolah', 'like', "%$search%")
+                ->orWhere('uraian_informasi_arsip', 'like', "%$search%");
+        })->paginate($perPage);
+
+        // Kirim data ke view
+        return view('Manajemen', compact('arsip', 'perPage', 'search'));
     }
 
     public function importArsipExcel(Request $request)
