@@ -160,24 +160,15 @@
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Tingkat Perkembangan</label>
-                        <select class="form-control" id= "tingkat_perkembangan" name="tingkat_perkembangan"
-                            value="{{ $arsip->tingkat_perkembangan }}">
-                            <option value="asli">Asli</option>
-                            <option value="tembusan">Tembusan</option>
-                            <option value="salinan">Salinan</option>
-                            <option value="pertinggal">Pertinggal</option>
-                        </select>
+                        <input class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip"
+                            value="{{ $arsip->tingkat_perkembangan }}" rows="3"
+                            placeholder="Masukkan Tingkat Perkembangan"></input>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Jenis Arsip</label>
-                        <select class="form-control" id= "jenis_arsip" name="jenis_arsip"
-                            value="{{ $arsip->jenis_arsip }}">
-                            <option value="">Pilih jenis arsip</option>
-                            <option value="tekstual">Tekstual</option>
-                            <option value="audio_visual">Audio Visual</option>
-                            <option value="kartografi">Kartografi</option>
-                            <option value="elektronik">Elektronik</option>
-                        </select>
+                        <input class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip"
+                            value="{{ $arsip->jenis_arsip }}" rows="3"
+                            placeholder="Masukkan Jenis Arsip"></input>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Tahun Awal</label>
@@ -208,23 +199,15 @@
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Kondisi Fisik</label>
-                        <select class="form-control" id= "kondisi_fisik" name="kondisi_fisik"
-                            value="{{ $arsip->kondisi_fisik }}">
-                            <option value="Baik">Baik</option>
-                            <option value="Rusak Ringan">Rusak Ringan</option>
-                            <option value="Rusak Berat">Rusak Berat</option>
-                        </select>
+                        <input class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip"
+                            value="{{ $arsip->kondisi_fisik}}" rows="3"
+                            placeholder="Masukkan Kondisi Fisik"></input>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Ukuran Kertas</label>
-                        <select class="form-control" id= "ukuran" name="ukuran" value="{{ $arsip->ukuran }}">
-                            <option value="A4">A4</option>
-                            <option value="A3">A3</option>
-                            <option value="F4">F4</option>
-                            <option value="Letter">Letter</option>
-                            <option value="Legal">Legal</option>
-                            <option value="lainnya">Lainnya</option>
-                        </select>
+                        <input class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip"
+                            value="{{ $arsip->ukuran }}" rows="3"
+                            placeholder="Masukkan Ukuran Kertas"></input>
                     </div>
                 </div>
             </div>
@@ -262,12 +245,9 @@
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Alih Media</label>
-                        <select class="form-control" id= "alih_media" name="alih_media"
-                            value="{{ $arsip->alih_media }}">
-                            <option value="">Pilih status</option>
-                            <option value="sudah">Sudah</option>
-                            <option value="belum">Belum</option>
-                        </select>
+                        <input class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip"
+                            value="{{ $arsip->alih_media }}" rows="3"
+                            placeholder="Masukkan Status"></input>
                     </div>
                 </div>
             </div>
