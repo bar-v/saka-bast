@@ -16,7 +16,6 @@
     <!--Icon Links-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 
-
     <style>
         /* Gaya tambahan untuk header */
         .header-bg {
@@ -83,7 +82,7 @@
         }
     </style>
 
-
+    <!-- ini untuk halaman -->
     <script>
         $(document).ready(function() {
             $('table').DataTable({
@@ -96,134 +95,122 @@
 
 </head>
 
-<x-app-layout>
+<body>
+    <x-app-layout>
+        <!-- tombol dan pencarian -->
+        <div class="ibu">
+            <!-- Modal -->
+            <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="importModalLabel">Upload File Excel</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('importarsip') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Upload File Excel</label>
+                                    <input type="file" name="file" class="form-control" required>
+                                </div>
 
-    <!-- tombol dan pencarian -->
-    <div class="ibu">
-        <!-- Modal -->
-        <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="importModalLabel">File Upload</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('importarsip') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group">
-                                <label>Upload File Excel</label>
-                                <input type="file" name="file" class="form-control" required>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Upload</button>
-                            <a href="{{ route('arsip.template') }}" class="btn btn-secondary">Download Template</a>
-                        </form>
-                    </div>
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                                <a href="{{ route('arsip.template') }}" class="btn btn-secondary">Download Template</a>
+                            </form>
+                        </div>
 
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Tombol Import modal -->
+            <button type="button" class="btn btn-success tombol1" data-toggle="modal"
+                data-target="#importModal">Import</button>
+            {{-- tombol create --}}
+            <a href="{{ route('create-Manajemen') }}"><button type="button"
+                    class="btn btn-primary tombol2">Create</button></a>
         </div>
 
-        <!-- Tombol Import modal -->
-        <button type="button" class="btn btn-success tombol1" data-toggle="modal"
-            data-target="#importModal">Import</button>
-        {{-- tombol create --}}
-        <a href="{{ route('create-Manajemen') }}"><button type="button"
-                class="btn btn-primary tombol2">Create</button></a>
-
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {!! session('error') !!}
-            </div>
-        @endif
-
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-    </div>
-
-    <!-- Kotak putih blakang tabel -->
-    <div class="flex justify-center items-center min-h-screen">
-        <div class="background-box shadow-lg">
-            <table id="myTable">
-                <thead>
-                    <tr>
-                        <th>NO ARSIP</th>
-                        <th>KODE PELAKSANA</th>
-                        <th>KODE KLASIFIKASI</th>
-                        <th>KODE SATKER</th>
-                        <th>NAMA UNIT PENGOLAH</th>
-                        <th>URAIAN INFORMASI ARSIP</th>
-                        <th>TAHUN AWAL</th>
-                        <th>TAHUN AKHIR</th>
-                        <th>TINGKAT PERKEMBANGAN ARSIP</th>
-                        <th>MEDIA SIMPAN</th>
-                        <th>JUMLAH BERKAS</th>
-                        <th>KONDISI FISIK</th>
-                        <th>UKURAN</th>
-                        <th>KETERANGAN</th>
-                        <th>RUANG</th>
-                        <th>LEMARI</th>
-                        <th>BOKS</th>
-                        <th>JENIS ARSIP</th>
-                        <th>ALIH MEDIA</th>
-                        <th>EDIT/HAPUS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($arsip as $item)
+        <!-- Kotak putih blakang tabel -->
+        <div class="flex justify-center items-center min-h-screen">
+            <div class="background-box shadow-lg">
+                <table id="myTable">
+                    <thead>
                         <tr>
-                            <td>{{ $item->nomor_arsip }}</td>
-                            <td>{{ $item->kode_pelaksana }}</td>
-                            <td>{{ $item->kode_klasifikasi }}</td>
-                            <td>{{ $item->kode_satker }}</td>
-                            <td>{{ $item->nama_unit_pengolah }}</td>
-                            <td>{{ $item->uraian_informasi_arsip }}</td>
-                            <td>{{ $item->tahun_awal }}</td>
-                            <td>{{ $item->tahun_akhir }}</td>
-                            <td>{{ $item->tingkat_perkembangan }}</td>
-                            <td>{{ $item->media_simpan }}</td>
-                            <td>{{ $item->jumlah_berkas }}</td>
-                            <td>{{ $item->kondisi_fisik }}</td>
-                            <td>{{ $item->ukuran }}</td>
-                            <td>{{ $item->keterangan }}</td>
-                            <td>{{ $item->ruang }}</td>
-                            <td>{{ $item->lemari }}</td>
-                            <td>{{ $item->boks }}</td>
-                            <td>{{ $item->jenis_arsip }}</td>
-                            <td>{{ $item->alih_media }}</td>
-                            <td>
-                                <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
-                                    title="Edit">
-                                    <i class="bi bi-pencil-square"
-                                        style="background: none; border: none; padding: 0; color: rgb(34, 0, 255);"></i>
-                                </a>|
-                                <form action="{{ route('delete-Manajemen', $item->id) }}" method="POST"
-                                    style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn-action btn-delete" title="Hapus"
-                                        onclick="return confirm('Are you sure you want to delete this item?')"
-                                        style="background: none; border: none; padding: 0; color: red;">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
+                            <th>NO ARSIP</th>
+                            <th>KODE PELAKSANA</th>
+                            <th>KODE KLASIFIKASI</th>
+                            <th>KODE SATKER</th>
+                            <th>NAMA UNIT PENGOLAH</th>
+                            <th>URAIAN INFORMASI ARSIP</th>
+                            <th>TAHUN AWAL</th>
+                            <th>TAHUN AKHIR</th>
+                            <th>TINGKAT PERKEMBANGAN ARSIP</th>
+                            <th>MEDIA SIMPAN</th>
+                            <th>JUMLAH BERKAS</th>
+                            <th>KONDISI FISIK</th>
+                            <th>UKURAN</th>
+                            <th>KETERANGAN</th>
+                            <th>RUANG</th>
+                            <th>LEMARI</th>
+                            <th>BOKS</th>
+                            <th>JENIS ARSIP</th>
+                            <th>ALIH MEDIA</th>
+                            <th>EDIT/HAPUS</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($arsip as $item)
+                            <tr>
+                                <td>{{ $item->nomor_arsip }}</td>
+                                <td>{{ $item->kode_pelaksana }}</td>
+                                <td>{{ $item->kode_klasifikasi }}</td>
+                                <td>{{ $item->kode_satker }}</td>
+                                <td>{{ $item->nama_unit_pengolah }}</td>
+                                <td>{{ $item->uraian_informasi_arsip }}</td>
+                                <td>{{ $item->tahun_awal }}</td>
+                                <td>{{ $item->tahun_akhir }}</td>
+                                <td>{{ $item->tingkat_perkembangan }}</td>
+                                <td>{{ $item->media_simpan }}</td>
+                                <td>{{ $item->jumlah_berkas }}</td>
+                                <td>{{ $item->kondisi_fisik }}</td>
+                                <td>{{ $item->ukuran }}</td>
+                                <td>{{ $item->keterangan }}</td>
+                                <td>{{ $item->ruang }}</td>
+                                <td>{{ $item->lemari }}</td>
+                                <td>{{ $item->boks }}</td>
+                                <td>{{ $item->jenis_arsip }}</td>
+                                <td>{{ $item->alih_media }}</td>
+                                <td>
+                                    <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
+                                        title="Edit">
+                                        <i class="bi bi-pencil-square"
+                                            style="background: none; border: none; padding: 0; color: rgb(34, 0, 255);"></i>
+                                    </a>|
+                                    <form action="{{ route('delete-Manajemen', $item->id) }}" method="POST"
+                                        style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-action btn-delete" title="Hapus"
+                                            onclick="return confirm('Are you sure you want to delete this item?')"
+                                            style="background: none; border: none; padding: 0; color: red;">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
-</x-app-layout>
+    </x-app-layout>
