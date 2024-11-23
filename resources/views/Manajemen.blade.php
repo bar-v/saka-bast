@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <!--link ke Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!--jQuery dan Bootstrap JS -->
@@ -86,13 +85,12 @@
     <script>
         $(document).ready(function() {
             $('table').DataTable({
-                "pageLength": 25, // jumlah baris per halaman
-                "lengthChange": false // Menonaktifkan opsi perubahan jumlah baris per halaman
+                "lengthChange": false, // Menonaktifkan opsi perubahan jumlah baris per halaman
+                "paging": false, // Hilangkan pagination
+                "info": false // Hilangkan informasi jumlah data
             });
         });
     </script>
-
-
 </head>
 
 <body>
@@ -113,17 +111,13 @@
                         <div class="modal-body">
                             <form action="{{ route('importarsip') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group">
-                                    <label>Upload File Excel</label>
-                                    <input type="file" name="file" class="form-control" required>
-                                </div>
 
-                                <button type="submit" class="btn btn-primary">Upload</button>
-                                <a href="{{ route('arsip.template') }}" class="btn btn-secondary">Download Template</a>
+                                <div class="form-group">
+                                    <input type="file" name="file" required="required">
+                                </div>
+                                <button type="submit">Import</button>
                             </form>
                         </div>
-
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         </div>
@@ -131,18 +125,34 @@
                 </div>
             </div>
 
+            {{-- @if (auth()->user()->hasRole('admin')) --}}
             <!-- Tombol Import modal -->
             <button type="button" class="btn btn-success tombol1" data-toggle="modal"
                 data-target="#importModal">Import</button>
             {{-- tombol create --}}
             <a href="{{ route('create-Manajemen') }}"><button type="button"
                     class="btn btn-primary tombol2">Create</button></a>
+
+            <a href="{{ route('export-Manajemen') }}">
+                <button type="button" class="btn btn-danger tombol3">Export</button>
+            </a>
+            {{-- @endif --}}
         </div>
 
         <!-- Kotak putih blakang tabel -->
         <div class="flex justify-center items-center min-h-screen">
             <div class="background-box shadow-lg">
                 <table id="myTable">
+                    <form method="GET" action="{{ route('Manajemen') }}">
+                        <label for="per_page">Jumlah baris per halaman:</label>
+                        <select name="per_page" id="per_page" onchange="this.form.submit()">
+                            <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
+                            <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
+                            <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                            <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                        </select>
+                    </form>
+                    {{ $arsip->appends(['per_page' => request('per_page')])->links() }}
                     <thead>
                         <tr>
                             <th>NO ARSIP</th>
@@ -164,7 +174,9 @@
                             <th>BOKS</th>
                             <th>JENIS ARSIP</th>
                             <th>ALIH MEDIA</th>
+                            {{-- @if (auth()->user()->hasRole('admin')) --}}
                             <th>EDIT/HAPUS</th>
+                            {{-- @endif --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -189,6 +201,7 @@
                                 <td>{{ $item->boks }}</td>
                                 <td>{{ $item->jenis_arsip }}</td>
                                 <td>{{ $item->alih_media }}</td>
+                                {{-- @if (auth()->user()->hasRole('admin')) --}}
                                 <td>
                                     <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
                                         title="Edit">
@@ -206,11 +219,13 @@
                                         </button>
                                     </form>
                                 </td>
+                                {{-- @endif --}}
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-        </div>
-
     </x-app-layout>
+</body>
+
+</html>
