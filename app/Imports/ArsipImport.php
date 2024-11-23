@@ -7,71 +7,51 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
-use Illuminate\Support\Facades\DB;
 
 class ArsipImport implements ToModel, WithStartRow, WithValidation, SkipsEmptyRows
 {
     /**
      * @param array $row
-     *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function model(array $row)
     {
-        // Validasi jika record sudah ada berdasarkan field unik
-        $existingRecord = DB::table('arsip')
-            ->where('nomor_arsip', $row[0])
-            ->where('kode_pelaksana', $row[1])
-            ->where('kode_klasifikasi', $row[2])
-            ->where('kode_satker', $row[3])
-            ->where('nama_unit_pengolah', $row[4])
-            ->where('uraian_informasi_arsip', $row[5])
-            ->where('tahun_awal', $row[6])
-            ->where('tahun_akhir', $row[7])
-            ->where('tingkat_perkembangan', $row[8])
-            ->where('media_simpan', $row[9])
-            ->where('jumlah_berkas', $row[10])
-            ->where('kondisi_fisik', $row[11])
-            ->where('ukuran', $row[12])
-            ->where('keterangan', $row[13])
-            ->where('ruang', $row[14])
-            ->where('lemari', $row[15])
-            ->where('boks', $row[16])
-            ->where('jenis_arsip', $row[17])
-            ->where('alih_media', $row[18])
-            ->first();
+        // Siapkan data untuk diinsert atau diupdate
+        $data = [
+            'nomor_arsip'            => trim($row[0] ?? ''),
+            'kode_pelaksana'         => trim($row[1] ?? ''),
+            'kode_klasifikasi'       => trim($row[2] ?? ''),
+            'kode_satker'            => trim($row[3] ?? ''),
+            'nama_unit_pengolah'     => trim($row[4] ?? ''),
+            'uraian_informasi_arsip' => trim($row[5] ?? ''),
+            'tahun_awal'             => !empty($row[6]) ? trim($row[6]) : null,
+            'tahun_akhir'            => !empty($row[7]) ? trim($row[7]) : null,
+            'tingkat_perkembangan'   => trim($row[8] ?? ''),
+            'media_simpan'           => trim($row[9] ?? ''),
+            'jumlah_berkas'          => trim($row[10] ?? ''),
+            'kondisi_fisik'          => trim($row[11] ?? ''),
+            'ukuran'                 => trim($row[12] ?? ''),
+            'keterangan'             => trim($row[13] ?? ''),
+            'ruang'                  => trim($row[14] ?? ''),
+            'lemari'                 => is_numeric($row[15]) ? (int)$row[15] : null,
+            'boks'                   => is_numeric($row[16]) ? (int)$row[16] : null,
+            'jenis_arsip'            => trim($row[17] ?? ''),
+            'alih_media'             => trim($row[18] ?? ''),
+        ];
 
+        // Insert atau update data menggunakan upsert
+        Arsip::upsert(
+            [$data], // Data yang akan diinsert/update
+            ['nomor_arsip', 'kode_pelaksana'], // Kolom unik
+            array_keys($data) // Kolom yang diupdate
+        );
 
-        if (!$existingRecord) {
-            // Insert record baru jika belum ada
-            return new Arsip([
-                'nomor_arsip'            => trim($row[0] ?? ''),
-                'kode_pelaksana'         => trim($row[1] ?? ''),
-                'kode_klasifikasi'       => trim($row[2] ?? ''),
-                'kode_satker'            => trim($row[3] ?? ''),
-                'nama_unit_pengolah'     => trim($row[4] ?? ''),
-                'uraian_informasi_arsip' => trim($row[5] ?? ''),
-                'tahun_awal'             => !empty($row[6]) ? trim($row[6]) : null,
-                'tahun_akhir'            => !empty($row[7]) ? trim($row[7]) : null,
-                'tingkat_perkembangan'   => trim($row[8] ?? ''),
-                'media_simpan'           => trim($row[9] ?? ''),
-                'jumlah_berkas'          => trim($row[10] ?? ''),
-                'kondisi_fisik'          => trim($row[11] ?? ''),
-                'ukuran'                 => trim($row[12] ?? ''),
-                'keterangan'             => trim($row[13] ?? ''),
-                'ruang'                  => trim($row[14] ?? ''),
-                'lemari'                 => trim($row[15] ?? ''),
-                'boks'                   => trim($row[16] ?? ''),
-                'jenis_arsip'            => trim($row[17] ?? ''),
-                'alih_media'             => trim($row[18] ?? ''),
-
-            ]);
-        }
-
+        // Tidak mengembalikan model karena `upsert` sudah mengelola operasi
         return null;
     }
 
     /**
+     * Baris awal data (melewati header)
      * @return int
      */
     public function startRow(): int
@@ -80,48 +60,33 @@ class ArsipImport implements ToModel, WithStartRow, WithValidation, SkipsEmptyRo
     }
 
     /**
+     * Aturan validasi untuk setiap kolom
      * @return array
      */
     public function rules(): array
     {
         return [
-            '0' => ['nullable', 'integer'],
-            '1' => ['nullable', 'string'],
-            '2' => ['nullable', 'string'],
-            '3' => ['nullable', 'string'],
-            '4' => ['nullable', 'string'],
-            '5' => ['nullable', 'string '],
-            '6' => ['nullable', 'numeric', 'digits:4'],
-            '7' => ['nullable', 'numeric', 'digits:4'],
-            '8' => ['nullable', 'string'],
-            '9' => ['nullable', 'string'],
-            '10' => ['nullable', 'string'],
-            '11' => ['nullable', 'string'],
-            '12' => ['nullable', 'string'],
-            '13' => ['nullable', 'string'],
-            '14' => ['nullable', 'string'],
-            '15' => ['nullable', 'integer'],
-            '16' => ['nullable', 'integer'],
-            '17' => ['nullable', 'string'],
+            '0' => ['nullable', 'string'], // nomor_arsip
+            '1' => ['nullable', 'string'], // kode_pelaksana
+            '2' => ['nullable', 'string'], // kode_klasifikasi
+            '6' => ['nullable', 'digits:4'], // tahun_awal
+            '7' => ['nullable', 'digits:4'], // tahun_akhir
+            '15' => ['nullable', 'integer'], // lemari
+            '16' => ['nullable'], // boks
         ];
     }
 
     /**
+     * Pesan kustom untuk validasi (opsional)
      * @return array
      */
-    // public function customValidationMessages()
-    // {
-    //     return [
-    //         '0.required' => 'Kolom Nomor Arsip pada baris :row wajib diisi',
-    //         '1.required' => 'Kolom Kode Pelaksana pada baris :row wajib diisi',
-    //         '2.required' => 'Kolom Kode Klasifikasi pada baris :row wajib diisi',
-    //         '3.required' => 'Kolom Kode Satker pada baris :row wajib diisi',
-    //         '4.required' => 'Kolom Nama Unit Pengolah pada baris :row wajib diisi',
-    //         '5.required' => 'Kolom Uraian Informasi Arsip pada baris :row wajib diisi',
-    //         '6.numeric' => 'Kolom Tahun Awal pada baris :row harus berupa angka',
-    //         '6.digits' => 'Kolom Tahun Awal pada baris :row harus 4 digit',
-    //         '7.numeric' => 'Kolom Tahun Akhir pada baris :row harus berupa angka',
-    //         '7.digits' => 'Kolom Tahun Akhir pada baris :row harus 4 digit'
-    //     ];
-    // }
+    public function customValidationMessages(): array
+    {
+        return [
+            '6.digits' => 'Kolom Tahun Awal harus berisi 4 digit pada baris :row.',
+            '7.digits' => 'Kolom Tahun Akhir harus berisi 4 digit pada baris :row.',
+            '15.integer' => 'Kolom Lemari harus berupa angka pada baris :row.',
+            '16.integer' => 'Kolom Boks harus berupa angka pada baris :row.',
+        ];
+    }
 }

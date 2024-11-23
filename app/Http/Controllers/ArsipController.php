@@ -21,12 +21,12 @@ class ArsipController extends Controller
                 ->orWhere('uraian_informasi_arsip', 'like', "%$search%");
         }
 
-        // Kembalikan data dalam format DataTables
-        return datatables($query)
-            ->addColumn('aksi', function ($item) {
-                return view('partials.aksi', compact('item'))->render();
-            })
-            ->make(true);
+        // // Kembalikan data dalam format DataTables
+        // return datatables($query)
+        //     ->addColumn('aksi', function ($item) {
+        //         return view('partials.aksi', compact('item'))->render();
+        //     })
+        //     ->make(true);
     }
 
     public function index(Request $request)
@@ -56,7 +56,7 @@ class ArsipController extends Controller
     {
         try {
             $request->validate([
-                'file' => 'required|mimes:xlsx,xls,csv|max:2048'
+                'file' => 'required|mimes:xlsx,xls,csv'
             ]);
 
             $file = $request->file('file');

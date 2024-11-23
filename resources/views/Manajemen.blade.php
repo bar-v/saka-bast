@@ -125,18 +125,30 @@
                 </div>
             </div>
 
-            {{-- @if (auth()->user()->hasRole('admin')) --}}
-            <!-- Tombol Import modal -->
-            <button type="button" class="btn btn-success tombol1" data-toggle="modal"
-                data-target="#importModal">Import</button>
-            {{-- tombol create --}}
-            <a href="{{ route('create-Manajemen') }}"><button type="button"
-                    class="btn btn-primary tombol2">Create</button></a>
+            @if (auth()->user()->hasRole('admin'))
+                <!-- Tombol Import modal -->
+                <button type="button" class="btn btn-success tombol1" data-toggle="modal"
+                    data-target="#importModal">Import</button>
+                {{-- tombol create --}}
+                <a href="{{ route('create-Manajemen') }}"><button type="button"
+                        class="btn btn-primary tombol2">Create</button></a>
 
-            <a href="{{ route('export-Manajemen') }}">
-                <button type="button" class="btn btn-danger tombol3">Export</button>
-            </a>
-            {{-- @endif --}}
+                <a href="{{ route('export-Manajemen') }}">
+                    <button type="button" class="btn btn-danger tombol3">Export</button>
+                </a>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {!! session('error') !!}
+                </div>
+            @endif
+
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
         </div>
 
         <!-- Kotak putih blakang tabel -->
@@ -145,6 +157,7 @@
                 <table id="myTable">
                     <form method="GET" action="{{ route('Manajemen') }}">
                         <label for="per_page">Jumlah baris per halaman:</label>
+
                         <select name="per_page" id="per_page" onchange="this.form.submit()">
                             <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
                             <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
@@ -152,6 +165,7 @@
                             <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
                         </select>
                     </form>
+
                     {{ $arsip->appends(['per_page' => request('per_page')])->links() }}
                     <thead>
                         <tr>
@@ -168,15 +182,15 @@
                             <th>JUMLAH BERKAS</th>
                             <th>KONDISI FISIK</th>
                             <th>UKURAN</th>
-                            <th>KETERANGAN</th>
                             <th>RUANG</th>
                             <th>LEMARI</th>
                             <th>BOKS</th>
                             <th>JENIS ARSIP</th>
                             <th>ALIH MEDIA</th>
-                            {{-- @if (auth()->user()->hasRole('admin')) --}}
-                            <th>EDIT/HAPUS</th>
-                            {{-- @endif --}}
+                            <th>KETERANGAN</th>
+                            @if (auth()->user()->hasRole('admin'))
+                                <th>EDIT/HAPUS</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -195,31 +209,31 @@
                                 <td>{{ $item->jumlah_berkas }}</td>
                                 <td>{{ $item->kondisi_fisik }}</td>
                                 <td>{{ $item->ukuran }}</td>
-                                <td>{{ $item->keterangan }}</td>
                                 <td>{{ $item->ruang }}</td>
                                 <td>{{ $item->lemari }}</td>
                                 <td>{{ $item->boks }}</td>
                                 <td>{{ $item->jenis_arsip }}</td>
                                 <td>{{ $item->alih_media }}</td>
-                                {{-- @if (auth()->user()->hasRole('admin')) --}}
-                                <td>
-                                    <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
-                                        title="Edit">
-                                        <i class="bi bi-pencil-square"
-                                            style="background: none; border: none; padding: 0; color: rgb(34, 0, 255);"></i>
-                                    </a>|
-                                    <form action="{{ route('delete-Manajemen', $item->id) }}" method="POST"
-                                        style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn-action btn-delete" title="Hapus"
-                                            onclick="return confirm('Are you sure you want to delete this item?')"
-                                            style="background: none; border: none; padding: 0; color: red;">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                                {{-- @endif --}}
+                                <td>{{ $item->keterangan }}</td>
+                                @if (auth()->user()->hasRole('admin'))
+                                    <td>
+                                        <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"
+                                            title="Edit">
+                                            <i class="bi bi-pencil-square"
+                                                style="background: none; border: none; padding: 0; color: rgb(34, 0, 255);"></i>
+                                        </a>|
+                                        <form action="{{ route('delete-Manajemen', $item->id) }}" method="POST"
+                                            style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-action btn-delete" title="Hapus"
+                                                onclick="return confirm('Are you sure you want to delete this item?')"
+                                                style="background: none; border: none; padding: 0; color: red;">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

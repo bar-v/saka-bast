@@ -63,7 +63,7 @@ require __DIR__ . '/auth.php';
 
 // Laravel Excel Import Route
 Route::get('/Manajemen', [App\Http\Controllers\ArsipController::class, 'index'])->name('Manajemen');
-Route::post('/importarsip', [App\Http\Controllers\ArsipController::class, 'importArsipExcel'])->name('importarsip');
+Route::post('/importarsip', [App\Http\Controllers\ArsipController::class, 'import'])->name('importarsip');
 
 // Laravel export
 use App\Http\Controllers\ManajemenController;
