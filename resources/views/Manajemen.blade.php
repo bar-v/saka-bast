@@ -183,11 +183,11 @@
                             <th>KONDISI FISIK</th>
                             <th>UKURAN</th>
                             <th>RUANG</th>
+                            <th>KETERANGAN</th>
                             <th>LEMARI</th>
                             <th>BOKS</th>
                             <th>JENIS ARSIP</th>
                             <th>ALIH MEDIA</th>
-                            <th>KETERANGAN</th>
                             @if (auth()->user()->hasRole('admin'))
                                 <th>EDIT/HAPUS</th>
                             @endif
@@ -209,12 +209,12 @@
                                 <td>{{ $item->jumlah_berkas }}</td>
                                 <td>{{ $item->kondisi_fisik }}</td>
                                 <td>{{ $item->ukuran }}</td>
+                                <td>{{ $item->keterangan }}</td>
                                 <td>{{ $item->ruang }}</td>
                                 <td>{{ $item->lemari }}</td>
                                 <td>{{ $item->boks }}</td>
                                 <td>{{ $item->jenis_arsip }}</td>
                                 <td>{{ $item->alih_media }}</td>
-                                <td>{{ $item->keterangan }}</td>
                                 @if (auth()->user()->hasRole('admin'))
                                     <td>
                                         <a href="{{ url('edit-Manajemen', $item->id) }}" class="btn-action btn-edit"

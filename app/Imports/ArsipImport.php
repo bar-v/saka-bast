@@ -66,7 +66,7 @@ class ArsipImport implements ToModel, WithStartRow, WithValidation, SkipsEmptyRo
     public function rules(): array
     {
         return [
-            '0' => ['nullable', 'string'], // nomor_arsip
+            '0' => ['nullable', 'integer'], // nomor_arsip
             '1' => ['nullable', 'string'], // kode_pelaksana
             '2' => ['nullable', 'string'], // kode_klasifikasi
             '6' => ['nullable', 'digits:4'], // tahun_awal
