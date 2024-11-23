@@ -154,17 +154,19 @@
         <!-- Kotak putih blakang tabel -->
         <div class="flex justify-center items-center min-h-screen">
             <div class="background-box shadow-lg">
-                <table id="myTable">
-                    <form method="GET" action="{{ route('Manajemen') }}">
-                        <label for="per_page">Jumlah baris per halaman:</label>
+                <form method="GET" action="{{ route('arsip.index') }}" class="d-flex align-items-center">
 
-                        <select name="per_page" id="per_page" onchange="this.form.submit()">
-                            <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
-                            <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
-                            <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
-                            <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
-                        </select>
-                    </form>
+                    {{-- Per Page Selector --}}
+                    <label for="per_page" class="me-2">Jumlah baris per halaman:</label>
+                    <select name="per_page" id="per_page" class="form-select" style="width: auto"
+                        onchange="this.form.submit()">
+                        <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
+                        <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
+                        <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                    </select>
+                </form>
+                <table id="myTable">
 
                     {{ $arsip->appends(['per_page' => request('per_page')])->links() }}
                     <thead>

@@ -6,6 +6,7 @@ use App\Models\Arsip;
 use App\Imports\ArsipImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class ArsipController extends Controller
 {
@@ -32,10 +33,18 @@ class ArsipController extends Controller
     public function index(Request $request)
     {
         // Ambil jumlah baris per halaman dari request atau gunakan nilai default
-        $perPage = $request->get('per_page', 25); // Default 25
+        $perPage = $request->input('per_page', 10); // Default 10 jika tidak ada yang dipilih
 
-        // Validasi jumlah baris agar tidak terlalu besar atau kecil
-        $perPage = is_numeric($perPage) && $perPage > 0 && $perPage <= 100 ? $perPage : 25;
+        $arsip = DB::table('arsip')
+            ->when($request->has('search'), function ($query) use ($request) {
+                return $query->where('kode_pelaksana', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('uraian_informasi_arsip', 'LIKE', '%' . $request->search . '%');
+                // Tambahkan kolom pencarian lainnya sesuai kebutuhan
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate($perPage)
+            ->withQueryString(); // Ini akan mempertahankan parameter URL saat pindah halaman
+
 
         // Ambil parameter pencarian dari request
         $search = $request->get('search');
@@ -64,7 +73,7 @@ class ArsipController extends Controller
             // Import data dengan validasi untuk mencegah duplikasi
             Excel::import(new ArsipImport, $file);
 
-            return back()->with('success', 'Data berhasil diimport!');
+            return back()->with('success', 'Data berhasil diimport dan diperbarui!');
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
             $failures = $e->failures();
             $errors = [];
