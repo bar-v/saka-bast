@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeUnit\FunctionUnit;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::get('/beranda', function () {
@@ -67,6 +67,7 @@ Route::post('/importarsip', [App\Http\Controllers\ArsipController::class, 'impor
 
 // Laravel export
 use App\Http\Controllers\ManajemenController;
+
 Route::get('/export-manajemen', [ManajemenController::class, 'export'])->name('export-Manajemen');
 
 // Create Section
@@ -88,4 +89,3 @@ Route::get('/arsip/data', [ArsipController::class, 'getData'])->name('arsip.data
 Route::get('admin', function () {
     return '<h1>Boo</h1>';
 })->middleware(['auth', 'verified', 'role: admin']);
-
