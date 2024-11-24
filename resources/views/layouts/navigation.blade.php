@@ -22,13 +22,6 @@
                             {{ __('Manajemen Arsip') }}
                         </x-nav-link>
                     </div>
-                    @if (auth()->user()->hasRole('admin'))
-                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <x-nav-link :href="route('Manajemenakun')" :active="request()->routeIs('Manajemenakun')">
-                                {{ __('Manajemen Akun') }}
-                            </x-nav-link>
-                        </div>
-                    @endif
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('Contact')" :active="request()->routeIs('Contact')">
                             {{ __('Contact Us') }}
