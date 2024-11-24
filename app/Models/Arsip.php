@@ -11,6 +11,7 @@ class Arsip extends Model
 
     use HasFactory;
 
+
     protected $table = "arsip";
     protected $primaryKey = "id";
     protected $fillable = [

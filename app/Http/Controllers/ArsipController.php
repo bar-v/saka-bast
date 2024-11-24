@@ -71,7 +71,7 @@ class ArsipController extends Controller
             $file = $request->file('file');
 
             // Import data dengan validasi untuk mencegah duplikasi
-            Excel::import(new ArsipImport, $file);
+            Excel::Import(new ArsipImport, $file);
 
             return back()->with('success', 'Data berhasil diimport dan diperbarui!');
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {

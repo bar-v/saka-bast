@@ -3,27 +3,28 @@
 namespace App\Imports;
 
 use App\Models\Arsip;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
+use Illuminate\Support\Collection;
 
-class ArsipImport implements ToModel, WithStartRow, WithValidation, SkipsEmptyRows
+class ArsipImport implements ToCollection, WithStartRow, WithValidation, SkipsEmptyRows
 {
     /**
-     * @param array $row
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * Handle data dari Excel sebagai koleksi.
+     *
+     * @param Collection $rows
+     * @return void
      */
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        $existing = Arsip::where('nomor_arsip', $row[0])->first();
+        $dataBatch = [];
+        $batchSize = 1000; // Ukuran batch
 
-        // Jika data sudah ada, cek apakah ada perubahan
-        if ($existing) {
-            $hasChanges = false;
-
-            // Array data yang akan diupdate
-            $newData = [
+        foreach ($rows as $row) {
+            $dataBatch[] = [
+                'nomor_arsip'            => is_numeric($row[0]) ? (int)$row[0] : null,
                 'kode_pelaksana'         => trim($row[1] ?? ''),
                 'kode_klasifikasi'       => trim($row[2] ?? ''),
                 'kode_satker'            => trim($row[3] ?? ''),
@@ -39,64 +40,72 @@ class ArsipImport implements ToModel, WithStartRow, WithValidation, SkipsEmptyRo
                 'keterangan'             => trim($row[13] ?? ''),
                 'ruang'                  => trim($row[14] ?? ''),
                 'lemari'                 => is_numeric($row[15]) ? (int)$row[15] : null,
-                'boks'                   => is_numeric($row[16]) ? (int)$row[16] : null,
+                'boks'                   => trim($row[16] ?? ''),
                 'jenis_arsip'            => trim($row[17] ?? ''),
                 'alih_media'             => trim($row[18] ?? ''),
             ];
 
-            // Cek setiap kolom apakah ada perubahan
-            foreach ($newData as $key => $value) {
-                if ($existing->$key != $value) {
-                    $hasChanges = true;
-                    break;
-                }
+            // Jika mencapai ukuran batch, proses batch
+            if (count($dataBatch) >= $batchSize) {
+                $this->upsertBatch($dataBatch);
+                $dataBatch = []; // Reset batch setelah eksekusi
             }
-
-            // Hanya update jika ada perubahan
-            if ($hasChanges) {
-                return Arsip::updateOrCreate(
-                    ['nomor_arsip' => $row[0]],
-                    $newData
-                );
-            }
-
-            return null; // Skip jika tidak ada perubahan
-
         }
-        // Jika data belum ada, buat baru
-        return new Arsip([
-            'nomor_arsip'            => trim($row[0] ?? ''),
-            'kode_pelaksana'         => trim($row[1] ?? ''),
-            'kode_klasifikasi'       => trim($row[2] ?? ''),
-            'kode_satker'            => trim($row[3] ?? ''),
-            'nama_unit_pengolah'     => trim($row[4] ?? ''),
-            'uraian_informasi_arsip' => trim($row[5] ?? ''),
-            'tahun_awal'             => !empty($row[6]) ? trim($row[6]) : null,
-            'tahun_akhir'            => !empty($row[7]) ? trim($row[7]) : null,
-            'tingkat_perkembangan'   => trim($row[8] ?? ''),
-            'media_simpan'           => trim($row[9] ?? ''),
-            'jumlah_berkas'          => trim($row[10] ?? ''),
-            'kondisi_fisik'          => trim($row[11] ?? ''),
-            'ukuran'                 => trim($row[12] ?? ''),
-            'keterangan'             => trim($row[13] ?? ''),
-            'ruang'                  => trim($row[14] ?? ''),
-            'lemari'                 => trim($row[15] ?? ''),
-            'boks'                   => trim($row[16] ?? ''),
-            'jenis_arsip'            => trim($row[17] ?? ''),
-            'alih_media'             => trim($row[18] ?? ''),
-        ]);
+
+        // Proses sisa data batch yang belum diproses
+        if (!empty($dataBatch)) {
+            $this->upsertBatch($dataBatch);
+        }
     }
+
     /**
-     * Baris awal data (melewati header)
+     * Fungsi untuk melakukan upsert pada batch data.
+     *
+     * @param array $dataBatch
+     * @return void
+     */
+    private function upsertBatch(array $dataBatch)
+    {
+        Arsip::upsert(
+            $dataBatch,
+            ['nomor_arsip'], // Kolom unik untuk mendeteksi duplikat
+            [
+                'kode_pelaksana',
+                'kode_klasifikasi',
+                'kode_satker',
+                'nama_unit_pengolah',
+                'uraian_informasi_arsip',
+                'tahun_awal',
+                'tahun_akhir',
+                'tingkat_perkembangan',
+                'media_simpan',
+                'jumlah_berkas',
+                'kondisi_fisik',
+                'ukuran',
+                'keterangan',
+                'ruang',
+                'lemari',
+                'boks',
+                'jenis_arsip',
+                'alih_media',
+            ]
+        );
+    }
+
+    /**
+     * Baris awal data (melewati header).
+     *
      * @return int
      */
     public function startRow(): int
     {
-        return 2;
+        return 2; // Lewati header Excel
     }
 
+
     /**
-     * Aturan validasi untuk setiap kolom
+     * Aturan validasi untuk setiap kolom.
+     *
      * @return array
      */
     public function rules(): array
@@ -113,7 +122,8 @@ class ArsipImport implements ToModel, WithStartRow, WithValidation, SkipsEmptyRo
     }
 
     /**
-     * Pesan kustom untuk validasi (opsional)
+     * Pesan kustom untuk validasi (opsional).
+     *
      * @return array
      */
     public function customValidationMessages(): array
