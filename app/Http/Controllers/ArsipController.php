@@ -117,22 +117,6 @@ class ArsipController extends Controller
             return back()->with('error', 'Gagal preview file: ' . $e->getMessage());
         }
     }
-    // Controller Download Template
-    public function downloadTemplate()
-    {
-        $filepath = public_path('templates/arsip_template.xlsx');
-
-        if (!file_exists($filepath)) {
-            return back()->with('error', 'Template file tidak ditemukan');
-        }
-
-        return response()->download($filepath);
-        $file = $request->file('file');
-        $namaFile = $file->getClientOriginalName();
-        $file->move('DataArsip', $namaFile);
-        Excel::import(new ArsipImport, public_path('/DataArsip/' . $namaFile));
-        return redirect('/Manajemen');
-    }
 
     // Sistem CRUD - Create Record baru melalui view create-Manajemen
     public function create()

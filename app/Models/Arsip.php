@@ -40,13 +40,11 @@ class Arsip extends Model
     public function setTahunAkhirAttribute($value)
     {
         $this->attributes['tahun_akhir'] = ($value === '-' || empty($value)) ? null : $value;
-        $this->attributes['tahun_awal'] = ($value === '-' || empty($value)) ? null : $value;
     }
 
     // Accessor - ketika mengambil data
     public function getTahunAkhirAttribute($value)
     {
-        return $value ?? '-';
         return $value ?? '-';
     }
 }
