@@ -184,8 +184,8 @@
                             <th>JUMLAH BERKAS</th>
                             <th>KONDISI FISIK</th>
                             <th>UKURAN</th>
-                            <th>RUANG</th>
                             <th>KETERANGAN</th>
+                            <th>RUANG</th>
                             <th>LEMARI</th>
                             <th>BOKS</th>
                             <th>JENIS ARSIP</th>

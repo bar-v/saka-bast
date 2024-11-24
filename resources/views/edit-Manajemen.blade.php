@@ -160,15 +160,14 @@
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Tingkat Perkembangan</label>
-                        <input class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip"
+                        <input class="form-control" id="tingkat_perkembangan" name="tingkat_perkembangan"
                             value="{{ $arsip->tingkat_perkembangan }}" rows="3"
                             placeholder="Masukkan Tingkat Perkembangan"></input>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Jenis Arsip</label>
-                        <input class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip"
-                            value="{{ $arsip->jenis_arsip }}" rows="3"
-                            placeholder="Masukkan Jenis Arsip"></input>
+                        <input class="form-control" id="jenis_arsip" name="jenis_arsip"
+                            value="{{ $arsip->jenis_arsip }}" rows="3" placeholder="Masukkan Jenis Arsip"></input>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Tahun Awal</label>
@@ -199,15 +198,14 @@
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Kondisi Fisik</label>
-                        <input class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip"
-                            value="{{ $arsip->kondisi_fisik}}" rows="3"
+                        <input class="form-control" id="kondisi_fisik" name="kondisi_fisik"
+                            value="{{ $arsip->kondisi_fisik }}" rows="3"
                             placeholder="Masukkan Kondisi Fisik"></input>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Ukuran Kertas</label>
-                        <input class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip"
-                            value="{{ $arsip->ukuran }}" rows="3"
-                            placeholder="Masukkan Ukuran Kertas"></input>
+                        <input class="form-control" id="ukuran" name="ukuran" value="{{ $arsip->ukuran }}"
+                            rows="3" placeholder="Masukkan Ukuran Kertas"></input>
                     </div>
                 </div>
             </div>
@@ -245,9 +243,8 @@
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Alih Media</label>
-                        <input class="form-control" id="uraian_informasi_arsip" name="uraian_informasi_arsip"
-                            value="{{ $arsip->alih_media }}" rows="3"
-                            placeholder="Masukkan Status"></input>
+                        <input class="form-control" id="alih_media" name="alih_media"
+                            value="{{ $arsip->alih_media }}" rows="3" placeholder="Masukkan Status"></input>
                     </div>
                 </div>
             </div>
