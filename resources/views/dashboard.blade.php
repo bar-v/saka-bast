@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="p-8 text-center">
                                         <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Akbar Sayyidina</h3>
-                                        <p class="text-lg text-blue-600 dark:text-blue-400 mb-4">Back-end & Databases Developer</p>
+                                        <p class="text-lg text-blue-600 dark:text-blue-400 mb-4">Back-end & Developer</p>
                                         <p class="text-gray-600 dark:text-gray-300 text-lg">“Let down underrated”</p>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="p-8 text-center">
                                         <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Octa Ramadhana A</h3>
-                                        <p class="text-lg text-blue-600 dark:text-blue-400 mb-4">Jabatan</p>
+                                        <p class="text-lg text-blue-600 dark:text-blue-400 mb-4">Back-end Developer</p>
                                         <p class="text-gray-600 dark:text-gray-300 text-lg">"Life is Fractal"</p>
                                     </div>
                                 </div>
@@ -133,13 +133,13 @@
                                 <!-- Team Member 6 -->
                                 <div class="team-card bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-lg">
                                     <div class="h-72 overflow-hidden">
-                                        <img src="{{ asset('image/default-avatar.jpg') }}" alt="Team Member 6" 
+                                        <img src="{{ asset('image/aniror.jpg') }}" alt="Team Member 6" 
                                              class="w-full h-full object-cover">
                                     </div>
                                     <div class="p-8 text-center">
                                         <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Annisa</h3>
-                                        <p class="text-lg text-blue-600 dark:text-blue-400 mb-4">Jabatan</p>
-                                        <p class="text-gray-600 dark:text-gray-300 text-lg">Deskripsi singkat tentang peran dan tanggung jawab.</p>
+                                        <p class="text-lg text-blue-600 dark:text-blue-400 mb-4">Writer</p>
+                                        <p class="text-gray-600 dark:text-gray-300 text-lg">"Writing is not just about ink and paper, but about the heart and soul. Let your writing reflect your true self."</p>
                                     </div>
                                 </div>
                             </div>
